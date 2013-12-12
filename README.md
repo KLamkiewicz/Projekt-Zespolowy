@@ -46,7 +46,7 @@ Projekt będzie posiadał swoją stronę internetową, która będzie zawierać 
 
 Imie | Nazwisko | Rola
 --- | --- | ---
-*Agnieszka* | *Rzeszuto* | **Web Developer , Level Designer , Documentation writer , Game Tester**
+*Agnieszka* | *Rzeszuto* | **Web Developer, Level Designer, Documentation writer, Game Tester**
 *Sabina* | *Litke* | **Web Developer , Level Designer , Documentation writer, Game Tester**
 *Jarosław* | *Cimoch* | **3D Artist, Second, Main Developer**
 *Krzysztof* | *Lamkiewicz* | **Main Developer, Kernel Developer**
