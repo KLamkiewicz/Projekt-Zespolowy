@@ -67,7 +67,19 @@ Wzorem dla gry „Jarek w krainie jednorożców” jest gra platformowa „Rayma
 
 Gra dzieli się na rundy, które przenoszą bohatera do innej krainy:
 
-- I runda – to lodowa kraina 
+- I poziom – to lodowa kraina, który zakończy łamigłówka „Krzyżówka z sumami”.
+Polega ona na wpisaniu w każde pole diagramu takiej cyfry, aby:
+* suma cyfr w każdym rzędzie poziomym była równa liczbie znajdującej się przed tym rzędem (nad ukośną kreską w przekreślonym polu);
+* suma cyfr w każdej kolumnie pionowej była równa liczbie znajdującej się nad tą kolumną (pod ukośną kreską w przekreślonym polu).
+Wszystkie cyfry w danym rzędzie lub kolumnie (tworzące podaną sumę) powinny być różne i żadna nie może być zerem. 
+
+
+W tej rundzie gracz porusza się po kostkach lodu. Jego celem jest uwolnienie jednorożca, które nastąpi po rozwiązaniu łamigłówki. Życie może stracić w wyniku spadnięcia z lodu, lub w momencie gdy zabraknie czasu. Dodatkowy czas można uzyskać zbierając klepsydrę, natomiast życie można zdobyć znajdując serce. Gra zaczyna się z 3 życiami oraz z 3 minutami czasu.
+
+-II poziom- w krainie wulkanów, który zakończy łamigłówka „A, B, C” polegająca na:
+Diagram należy podzielić wzdłuż oznaczonych linii na części - każda o innym kształcie i wielkości - tak, aby w każdej części znalazło się po jednym i tylko jednym A, B i C.
+Podobne jak w rundzie I, gracz dąży do uwolnienia jednorożca. Tym razem poruszając się po fragmentach ziemi musi uważać na wypływającą lawę. Bonusy podobnie jak w rundzie I. 
+ 
 
 3. Sterowanie postacią:
 
