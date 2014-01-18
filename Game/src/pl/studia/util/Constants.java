@@ -8,5 +8,6 @@ public class Constants {
 	public static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
 	
 	
-	
+	public static final float PIXELS_TO_METER = 100;
+
 }

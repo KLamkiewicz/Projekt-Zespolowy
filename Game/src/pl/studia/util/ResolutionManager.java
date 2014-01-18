@@ -2,6 +2,7 @@
 // Dostosowuje automatycznie rozdzielczoœæ i zmienia zakres widzenia poprzez przesuwanie VIEWPORTU
 // poszczególne wartoœci w if,else statemant mog¹ ulec zmianie aby lepiej dopasowaæ skalowanie
 package pl.studia.util;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import pl.studia.util.Constants;
 
@@ -29,10 +30,11 @@ public class ResolutionManager {
         		scale+=0.3;
             	System.out.println("Scale2: "+scale);
                 crop.x = (width - Constants.VIRTUAL_WIDTH*scale)/2f;
+                
         	}
         	else if(width<1920&&width>550){
         		scale = (float)height/((float)Constants.VIRTUAL_HEIGHT);
-        		scale+=0.3;
+        		scale+=0.25;
             	System.out.println("Scale7: "+scale);
                 crop.x = (width - Constants.VIRTUAL_WIDTH*scale)/2f;
         	}
@@ -91,12 +93,48 @@ public class ResolutionManager {
         		System.out.println("second");
         		}
         }
-    	
-    	
-    	
-    	
-    	
+
     }
+    
+    
+    public enum HorizontalAlignment {
+	    LEFT, MIDDLE, RIGHT
+	}
+	 
+	public enum VerticalAlignment {
+	    TOP, MIDDLE, BOTTOM
+	}
+	 
+	public static float calculateX(HorizontalAlignment horizontal, float deltax, float sizex) {
+	        int width = Gdx.graphics.getWidth();
+	 
+	        switch (horizontal) {
+	            case LEFT:
+	                return deltax;
+	            case MIDDLE:
+	                return (width / 2) + deltax - sizex / 2;
+	            case RIGHT:
+	                return width + deltax - sizex;
+	        }
+	        return -1;
+	    }
+	 
+	    public static float calculateY(VerticalAlignment vertical, float deltay, float sizey) {
+	        int height = Gdx.graphics.getHeight();
+	 
+	        switch (vertical) {
+	            case TOP:
+	            	return height + deltay - sizey;
+	                
+	            case MIDDLE:
+	                return (height / 2) + deltay - sizey / 2;
+	            case BOTTOM:
+	            	return deltay;
+	        }
+	        return -1;
+
+	    }
+    
     
     
 }
