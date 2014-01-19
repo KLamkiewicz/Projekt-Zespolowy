@@ -1,9 +1,13 @@
 package pl.studia.gra;
 
+import pl.studia.objects.Assets;
+import pl.studia.objects.Background;
 import pl.studia.util.Constants;
 import pl.studia.util.ResolutionManager;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -31,11 +35,13 @@ public class WorldRenderer implements Disposable{
 	private Sprite 				sprite2;
 	private Texture 			texture;
 	private Texture 			texture2;
+	private Background			background;
 	
 	public WorldRenderer(WorldController worldController){
 		this.worldController=worldController;
 		init();
 	}
+	
 	private void init(){
 		batch =new SpriteBatch();
 		texture = new Texture(Gdx.files.internal("data/kk.jpg"));
@@ -46,12 +52,14 @@ public class WorldRenderer implements Disposable{
 		sprite = new Sprite(texture);
 		sprite2=new Sprite(texture2);
 		
-		
 		cam = new OrthographicCamera(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT);	
 		cam.position.set(Constants.VIRTUAL_WIDTH/2,Constants.VIRTUAL_HEIGHT/2, 0); // 3 parametr nie istotny przy 2d
 		
 		cameraGUI =new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());	
 		cameraGUI.position.set(Constants.VIRTUAL_WIDTH/2,Constants.VIRTUAL_HEIGHT/2, 0);
+		
+		Assets.instance.init(new AssetManager());
+		background = new Background();
 	}
 	
 	public void render(){
@@ -74,6 +82,8 @@ public class WorldRenderer implements Disposable{
 		batch.setProjectionMatrix(cam.combined);
 		batch.begin();
 		sprite.draw(batch);
+		//Texture Region test 
+		//background.render(batch);
 		batch.end();
 
 		renderTestObjects();
@@ -83,7 +93,7 @@ public class WorldRenderer implements Disposable{
                           (int) viewport2.width, (int) viewport2.height);
      	renderGui(batch);
 		
-		
+		handleInput(Gdx.graphics.getDeltaTime());
 		
 	}
 	
@@ -119,9 +129,9 @@ public class WorldRenderer implements Disposable{
 	     cameraGUI.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0); 
 	     
 
-			/*Resize and replace HUD ELEMENTS - !*/
-			sprite2.setSize(512*ResolutionManager.scale, 512*ResolutionManager.scale);
-			sprite2.setPosition(ResolutionManager.calculateX(ResolutionManager.HorizontalAlignment.RIGHT,0,512*ResolutionManager.scale ),ResolutionManager.calculateY(ResolutionManager.VerticalAlignment.TOP,0,512*ResolutionManager.scale ));
+		/*Resize and replace HUD ELEMENTS - !*/
+		sprite2.setSize(512*ResolutionManager.scale, 512*ResolutionManager.scale);
+		sprite2.setPosition(ResolutionManager.calculateX(ResolutionManager.HorizontalAlignment.RIGHT,0,512*ResolutionManager.scale ),ResolutionManager.calculateY(ResolutionManager.VerticalAlignment.TOP,0,512*ResolutionManager.scale ));
 
 		
 	}
@@ -130,6 +140,22 @@ public class WorldRenderer implements Disposable{
 	public void dispose(){
 		batch.dispose();
 		texture.dispose();
+	}
+	
+	//test method ONLY
+	public void handleInput(float deltaTime){
+	    if (Gdx.input.isKeyPressed(Keys.LEFT))
+	    		cam.position.x-=10;
+	    if (Gdx.input.isKeyPressed(Keys.RIGHT))
+	            cam.position.x+=10;
+	    if (Gdx.input.isKeyPressed(Keys.UP))
+	            cam.position.y+=10;
+	    if (Gdx.input.isKeyPressed(Keys.DOWN))
+	            cam.position.y-=10;
+	    if (Gdx.input.isKeyPressed(Keys.ESCAPE)){
+	    		Gdx.app.log("Exit", Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
+	    		Gdx.app.exit();
+	    }
 	}
 	
 }

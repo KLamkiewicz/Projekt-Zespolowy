@@ -4,14 +4,15 @@ package pl.studia.gra;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 
 
 
-	public class GameClass implements ApplicationListener {
+public class GameClass implements ApplicationListener {
 		
-		private WorldController		worldController;
-		private WorldRenderer		worldRenderer;
-		private boolean				paused;
+	private WorldController		worldController;
+	private WorldRenderer		worldRenderer;
+	private boolean				paused;
 
 
 	@Override
@@ -19,6 +20,7 @@ import com.badlogic.gdx.Gdx;
 
 		//Set Libgdx log level to DEBUG
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		
 		//Initialize controller and renderer
 		worldController = new WorldController();
 		worldRenderer = new WorldRenderer(worldController);
@@ -41,8 +43,6 @@ import com.badlogic.gdx.Gdx;
 		}
 		
 		worldRenderer.render();
-
-
 	}
 
 	@Override
@@ -65,15 +65,5 @@ import com.badlogic.gdx.Gdx;
 	public void resume() {
 		paused = false;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
