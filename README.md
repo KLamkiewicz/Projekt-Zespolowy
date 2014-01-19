@@ -55,12 +55,12 @@ Imie | Nazwisko | Rola
 
 
                                 Dokumentacja gry – etap pierwszy
-                                „Jarek w krainie jednorożców”*
+                                „Tiny Time”*
 *tytuł gry roboczy
 
 1. Zasady gry:
 
-Wzorem dla gry „Jarek w krainie jednorożców” jest gra platformowa „Rayman”. Gracz wciela się w postać (?), której zadaniem jest przejść przez wszystkie krainy, gdzie czeka go zwycięstwo i nagroda. Podczas tej wędrówki musi pokonać różne przeszkody, którymi są zróżnicowanie terenu oraz stwory. Trudność w ich pokonaniu zależna jest od etapu gry. Można je próbować ominąć lub zaatakować.  W trakcie całej przygody zbierane są monety(?), które dają określone bonusy. Dodatkowo w każdej krainie gracz spotka postać, która przydzieli nam zadanie do wykonania na danej planszy.
+Wzorem dla gry „Tiny Time” jest gra platformowa „Rayman”. Gracz wciela się w postać (?), której zadaniem jest przejść przez wszystkie krainy, gdzie czeka go zwycięstwo i nagroda. Podczas tej wędrówki musi pokonać różne przeszkody, którymi są zróżnicowanie terenu oraz stwory. Trudność w ich pokonaniu zależna jest od etapu gry. Można je próbować ominąć lub zaatakować.  W trakcie całej przygody zbierane są monety(?), które dają określone bonusy. Dodatkowo w każdej krainie gracz spotka postać, która przydzieli nam zadanie do wykonania na danej planszy.
 
 
 2. Podział gry: (punkt zostanie uzupełniany na kolejnych etapach pracy)
