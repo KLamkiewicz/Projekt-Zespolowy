@@ -6,7 +6,21 @@ repeat: none
 background
   rotate: false
   xy: 2, 2
-  size: 2592, 1080
-  orig: 2592, 1080
+  size: 1024, 1024
+  orig: 1024, 1024
+  offset: 0, 0
+  index: -1
+ha
+  rotate: false
+  xy: 1028, 2
+  size: 1024, 1024
+  orig: 1024, 1024
+  offset: 0, 0
+  index: -1
+he
+  rotate: false
+  xy: 2054, 2
+  size: 1024, 1024
+  orig: 1024, 1024
   offset: 0, 0
   index: -1

@@ -1,20 +1,25 @@
 package pl.studia.util;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 
 public class Constants {
 	
-	public static Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
-	/////////////////////////////////// Sta³e Ekran ///////////////////////////////////
-	public static final int VIRTUAL_WIDTH = 1920;
-	public static final int VIRTUAL_HEIGHT = 1080;
-	public static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
-	public static final String TEXTURE_ATLAS_OBJECTS = "images/game.pack";
-	public static final int SCREEN_WIDTH = screenDimension.width;
-	public static final int SCREEN_HEIGHT = screenDimension.height;
+	/*Screen Constants*/
+	// Visible game world is 16 meters wide
+	public static final float VIEWPORT_WIDTH = 16.0f;
 	
-	public static final float PIXELS_TO_METER = 100;
+	// Visible game world is 10 meters tall
+	public static final float VIEWPORT_HEIGHT = 10.0f;
+	
+	/*Pixels for Pixel Perfect Positioning
+	GUI is independent from Physics etc. calculations
+	pixels are good here*/
+	public static final int VIEWPORT_GUI_HEIGHT = 1040;
+	public static final int VIEWPORT_GUI_WIDTH = 650;
+	
+	
+	public static final String TEXTURE_ATLAS_OBJECTS = "images/game.pack";
+	
+	
+
 
 }

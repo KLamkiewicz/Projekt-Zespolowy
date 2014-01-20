@@ -1,7 +1,4 @@
 package pl.studia.objects;
-
-import pl.studia.util.Constants;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -13,7 +10,7 @@ public class Background {
 	}
 	
 	public void render(SpriteBatch batch){
-		batch.draw(backgroundRegion.getTexture(), 0, 0-(Constants.SCREEN_HEIGHT/2), backgroundRegion.getRegionWidth(), backgroundRegion.getRegionHeight());
+		batch.draw(backgroundRegion.getTexture(), 0, 0,12.8f, 12.8f,backgroundRegion.getRegionX(),backgroundRegion.getRegionY(),backgroundRegion.getRegionWidth(), backgroundRegion.getRegionHeight(), false, false);
 	}
 }
 

@@ -23,7 +23,7 @@ public class Main {
 			Settings settings = new Settings();
 			settings.maxWidth = 4096;
 			settings.maxHeight = 4096;
-			//settings.debug = drawDebugOutline;
+			settings.debug = drawDebugOutline;
 			TexturePacker2.process(settings, "assets-raw/images",
 					"../Game-android/assets/images", "game.pack");
 		}
@@ -31,7 +31,7 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		
 		cfg.title = "Game";
-		cfg.useGL20 = true;
+		cfg.useGL20 = false;
 		cfg.fullscreen=false;
 		cfg.width = screenDimension.width;
 		cfg.height= screenDimension.height;
