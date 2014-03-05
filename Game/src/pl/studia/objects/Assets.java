@@ -19,10 +19,11 @@ public class Assets implements Disposable, AssetErrorListener {
         public static final Assets instance = new Assets();
         private AssetManager assetManager;
         public AssetBackground backgroundAsset;
-
+        public AssetPlatform platformAsset;
 
         // singleton: prevent instantiation from other classes
         private Assets() {
+        	
         }
 
         public void init(AssetManager assetManager) {
@@ -45,24 +46,36 @@ public class Assets implements Disposable, AssetErrorListener {
                         t.setFilter(TextureFilter.Linear, TextureFilter.Linear);
                 // create game resource objects
                 backgroundAsset = new AssetBackground(atlas);
+                //platformAsset = new AssetPlatform(atlas);
         }
 
+        
         @Override
         public void dispose() {
                 assetManager.dispose();
         }
 
+        
         @Override
         public void error(AssetDescriptor asset, Throwable throwable) {
                 Gdx.app.error(TAG, asset.fileName, (Exception) throwable);
         }
 
-        public class AssetBackground {
+       
+        public class AssetBackground{
                 public final AtlasRegion background;
 
                 public AssetBackground(TextureAtlas atlas) {
                 	background = atlas.findRegion("background");
                 }
         }
-
+        
+        public class AssetPlatform{
+        		public final AtlasRegion platform;
+        		
+        		public AssetPlatform(TextureAtlas atlas) {
+        			platform = atlas.findRegion("platform");
+        		}
+        }
+        
 }
