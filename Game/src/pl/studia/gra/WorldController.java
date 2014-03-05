@@ -1,30 +1,40 @@
 package pl.studia.gra;
 
+import pl.studia.util.CameraHelper;
+import pl.studia.util.Constants;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 
-public class WorldController {
+public class WorldController extends InputAdapter{
 
-	@SuppressWarnings("unused")
+
 	private static final String TAG = WorldController.class.getName();
+	public CameraHelper 		cameraHelper;
+	public Sprite[] 			testSprites;
+	public int 					selectedSprite;
+	public Texture 				texture;
 	
-	public Sprite[] testSprites;
-	public int 		selectedSprite;
-	public Texture 	texture;
 	
 	public WorldController(){
 		init();
 	}
 	
 	
-	/*Initialization in separate methon instead of in constructor,
+	/*Initialization in separate method instead of in constructor,
 	* this approach can greatly reduce 
 	* the interruptions by the Garbage Collector*/
 	private void init(){
+		Gdx.input.setInputProcessor(this);
+		cameraHelper = new CameraHelper();
 		initTestObjects();
+		cameraHelper.setCharacter(testSprites[0]);
 	}
 	
 	
@@ -36,7 +46,38 @@ public class WorldController {
 	
 	public void update (float deltaTime){
 		updateTestObjects(deltaTime);
+		handleInput(deltaTime);
 	}
+	
+	
+	
+	
+	@Override
+	public boolean keyUp(int keycode) {
+		// Reset game world
+		if (keycode == Keys.R) {
+			init();
+			Gdx.app.debug(TAG, "Game world resetted");
+		}
+		// Select next sprite
+		else if (keycode == Keys.SPACE) {
+			selectedSprite = (selectedSprite + 1) % testSprites.length;
+			Gdx.app.debug(TAG, "Sprite #" + selectedSprite + " selected");
+			cameraHelper.setCharacter(testSprites[selectedSprite]);
+
+		}
+		else if (keycode==Keys.ESCAPE){
+	    		Gdx.app.log("Exit", Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
+	    		Gdx.app.exit();
+	    }
+		else if (keycode==Keys.ENTER){
+    		cameraHelper.setCharacter(cameraHelper.hasCharacter() ? null : testSprites[selectedSprite]);
+    		Gdx.app.debug(TAG, "Camera follow enabled: " + cameraHelper.hasCharacter());
+    }
+		return false;
+	}
+	
+	
 	
 	
 	private void initTestObjects(){
@@ -77,7 +118,46 @@ public class WorldController {
 		}
 
 		
+		private void moveSelectedSprite(float x, float y){
+			testSprites[selectedSprite].translate(x, y);
+		}
 		
+		private void moveCamera(float x, float y){
+			x+=cameraHelper.getPosition().x;
+			y+=cameraHelper.getPosition().y;
+			cameraHelper.setPosition(x,y);
+		}
+		
+		//test method ONLY
+		private void handleInput(float deltaTime){
+		    
+			// Selected Sprite Controls - TEMPORARY
+			if (Gdx.input.isKeyPressed(Keys.LEFT)){
+		    	moveSelectedSprite(-0.2f, 0f);
+		    }
+		    if (Gdx.input.isKeyPressed(Keys.RIGHT))
+		    	moveSelectedSprite(0.2f, 0f);
+		    if (Gdx.input.isKeyPressed(Keys.UP))
+		    	moveSelectedSprite(0f, 0.2f);
+		    if (Gdx.input.isKeyPressed(Keys.DOWN))
+		    	moveSelectedSprite(0f, -0.2f);
+		    // Camera Controls Move
+		    
+		    if (Gdx.input.isKeyPressed(Keys.A)){
+		    	moveCamera(-0.2f, 0f);
+		    }
+		    if (Gdx.input.isKeyPressed(Keys.D))
+		    	moveCamera(0.2f, 0f);
+		    if (Gdx.input.isKeyPressed(Keys.W))
+		    	moveCamera(0f, 0.2f);
+		    if (Gdx.input.isKeyPressed(Keys.S))
+		    	moveCamera(0f, -0.2f);
+		    
+		    
+		}
+		
+		
+	
 		
 		
 }

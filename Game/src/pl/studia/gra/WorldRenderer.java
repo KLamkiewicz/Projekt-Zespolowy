@@ -2,12 +2,9 @@ package pl.studia.gra;
 
 import pl.studia.objects.Assets;
 import pl.studia.objects.Background;
-import pl.studia.util.CharacterCamera;
 import pl.studia.util.Constants;
 import pl.studia.util.ResolutionManager;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -19,18 +16,15 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class WorldRenderer implements Disposable{
 
-	private OrthographicCamera 	debugCamera;
+	
 	private OrthographicCamera 	cam;
 	private OrthographicCamera 	cameraGUI;
-	private CharacterCamera 	characterCamera;
-	
 	private SpriteBatch 		batch;
 	private WorldController		worldController;
 	
 	/**
 	 * Testing debugmode variable
 	 */
-	private boolean debugMode = false;
 	
 	
 	/*Temporary ! It shouldn't be here 
@@ -58,9 +52,7 @@ public class WorldRenderer implements Disposable{
 		//sprite = new Sprite(texture);
 		sprite2=new Sprite(texture2);
 		
-		debugCamera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
-		debugCamera.position.set(Constants.VIEWPORT_WIDTH/2f,Constants.VIEWPORT_HEIGHT/2f, 0);
-		debugCamera.update();
+	
 		
 		cam = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);	
 		cam.position.set(Constants.VIEWPORT_WIDTH/2f,Constants.VIEWPORT_HEIGHT/2f, 0); // 3 parametr nie istotny przy 2d
@@ -70,41 +62,33 @@ public class WorldRenderer implements Disposable{
 		cameraGUI.position.set(0,0, 0);
 		cameraGUI.setToOrtho(false); 
 		
-		characterCamera = new CharacterCamera();
-		characterCamera.setCharacter(worldController.testSprites[0]);
-		
 		Assets.instance.init(new AssetManager());
 		background = new Background();
 	}
 	
 	public void render(){
- 		cameraMode();
-      	//Change to character
- 		characterCamera.updateCharacterCamera(cam);
- 		debugCamera.update();
+ 		
+      	//Apply settings of helper to main camera
+ 		worldController.cameraHelper.applyTo(cam);
         cameraGUI.update();
 
         // clear previous frame
         Gdx.gl.glClearColor(0x64/255.0f, 0x95/255.0f, 0xed/255.0f, 0xff/255.0f);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-     
+        batch.setProjectionMatrix(cam.combined);
 		batch.begin();
 		background.render(batch);
 		batch.end();
 
-		renderTestObjects(debugMode);
+		renderTestObjects();
      	renderGui(batch);
 	
 	}
 	
-	private void renderTestObjects(boolean debugMode){
-		if(debugMode){
-			batch.setProjectionMatrix(debugCamera.combined);
-		}
-		else{
-			batch.setProjectionMatrix(cam.combined);
-		}
+	private void renderTestObjects(){
+	
+		
 		batch.begin();
 		for(Sprite sprite: worldController.testSprites){
 			sprite.draw(batch);
@@ -143,59 +127,7 @@ public class WorldRenderer implements Disposable{
 		//texture.dispose();
 	}
 	
-	//test method ONLY
-	public void handleInput(float deltaTime){
-	    if (Gdx.input.isKeyPressed(Keys.LEFT)){
-	    		characterCamera.moveCharacterCamera(-0.2f, 0f);
-	    }
-	    if (Gdx.input.isKeyPressed(Keys.RIGHT))
-	    		characterCamera.moveCharacterCamera(0.2f, 0f);
-	    if (Gdx.input.isKeyPressed(Keys.UP))
-	    		characterCamera.moveCharacterCamera(0f, 0.2f);
-	    if (Gdx.input.isKeyPressed(Keys.DOWN))
-	    		characterCamera.moveCharacterCamera(0f, -0.2f);
-	    if(Gdx.input.isKeyPressed(Keys.Q)){
-	    	debugMode = (debugMode == true) ? false : true;
-	    	System.out.println(debugMode);
-	    }
-	    if (Gdx.input.isKeyPressed(Keys.ESCAPE)){
-	    		Gdx.app.log("Exit", Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
-	    		Gdx.app.exit();
-	    }
-	}
-	
-	//test method ONLY
-	public void debugInput(float deltaTime){
-	    if (Gdx.input.isKeyPressed(Keys.A)){
-	    		debugCamera.position.x-=0.2;
-	    }
-	    if (Gdx.input.isKeyPressed(Keys.D))
-	    		debugCamera.position.x+=0.2;
-	    if (Gdx.input.isKeyPressed(Keys.W))
-	    		debugCamera.position.y+=0.2;
-	    if (Gdx.input.isKeyPressed(Keys.S))
-	    		debugCamera.position.y-=0.2;
-	    if(Gdx.input.isKeyPressed(Keys.Q)){
-	    	debugMode = (debugMode == true) ? false : true;
-	    	System.out.println(debugMode);
-	    }
-	    if (Gdx.input.isKeyPressed(Keys.ESCAPE)){
-	    		Gdx.app.log("Exit", Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
-	    		Gdx.app.exit();
-	    }
-	}
 
-	/*
-	 * Changes the mode of the camera from regular game mode to debug mode with free camera
-	 */
-	public void cameraMode(){
-		if(!debugMode){
-			handleInput(Gdx.graphics.getDeltaTime());
-			batch.setProjectionMatrix(cam.combined);
-		}
-		else{
-	 		debugInput(Gdx.graphics.getDeltaTime());
-	 		batch.setProjectionMatrix(debugCamera.combined);
-		}
-	}
+
+
 }
