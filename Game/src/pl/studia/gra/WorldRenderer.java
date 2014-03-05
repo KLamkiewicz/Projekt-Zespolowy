@@ -66,9 +66,13 @@ public class WorldRenderer implements Disposable{
 		background = new Background();
 	}
 	
+	
+	
+	
 	public void render(){
  		
       	//Apply settings of helper to main camera
+		
  		worldController.cameraHelper.applyTo(cam);
         cameraGUI.update();
 

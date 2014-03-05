@@ -46,6 +46,7 @@ public class WorldController extends InputAdapter{
 	
 	public void update (float deltaTime){
 		updateTestObjects(deltaTime);
+		cameraHelper.shakeCam(deltaTime);
 		handleInput(deltaTime);
 	}
 	
@@ -74,6 +75,10 @@ public class WorldController extends InputAdapter{
     		cameraHelper.setCharacter(cameraHelper.hasCharacter() ? null : testSprites[selectedSprite]);
     		Gdx.app.debug(TAG, "Camera follow enabled: " + cameraHelper.hasCharacter());
     }
+		else if(keycode==Keys.Q){
+			cameraHelper.evokeShakeCam(2);
+			Gdx.app.debug(TAG, "Shake enabled");
+		}
 		return false;
 	}
 	

@@ -1,7 +1,9 @@
 package pl.studia.util;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public class CameraHelper {
@@ -9,7 +11,11 @@ public class CameraHelper {
 	 * Character position is defined by the character.getX() and character.getY()
 	 */
 	private Vector2 position;
-	private Sprite character;
+	private Sprite	character;
+	private float 	currentShakeTime=1;
+	private float 	shakeTime=0;
+	private float 	shakeX;
+	private float 	shakeY;
 
 	public CameraHelper(){
 		position = new Vector2();
@@ -54,22 +60,51 @@ public class CameraHelper {
 		this.position = characterPosition;
 	}
 	
+	
+	//This method is called (only if it were evoked before) at least severl times per second in WorldController update
+	//DebugMode(FreeMode) has no shakeCam - null pointer exception prevention
+	public void shakeCam(float deltaTime){
+		if (currentShakeTime <= shakeTime && hasCharacter()) {
+
+			shakeX = MathUtils.random(character.getX()-0.2f,character.getX()+0.2f);
+			shakeY = MathUtils.random(character.getY()-0.1f,character.getY()+ 0.1f);
+
+			
+			this.position.x = shakeX;
+			this.position.y = shakeY;
+			
+			
+			this.currentShakeTime+=deltaTime;		
+		}
+	}
+	
+	// This method evokes shakeCam on main camera.
+	public void evokeShakeCam(float time){
+		this.shakeTime=time;
+		this.currentShakeTime=0;
+	}
+	
 	/**
 	 * Updates the camera focused on the character
 	 * 
 	 * @param camera	OrthographicCamera that is going to be used for the character
 	 */
-	public void applyTo(OrthographicCamera camera){
-		//This method is called at least several times per second
-		// Be carefull !! If camera has no character to follow, you can't establish position without null pointer exception
-		if (!hasCharacter()){
-			camera.position.x=this.position.x;
-			camera.position.y=this.position.y;
+	public void applyTo(OrthographicCamera camera) {
+		// This method is called at least several times per second
+		// Be carefull !! If camera has no character to follow, you can't
+		// establish position without null pointer exception
+		if (!hasCharacter()) {
+			camera.position.x = this.position.x;
+			camera.position.y = this.position.y;
 			camera.update();
-		}
-		else {
+		} else {
 			camera.position.x = character.getX();
 			camera.position.y = character.getY();
+
+			if (currentShakeTime <= shakeTime) {
+				camera.position.x = this.position.x;
+				camera.position.y = this.position.y;
+			}
 			camera.update();
 		}
 	}
