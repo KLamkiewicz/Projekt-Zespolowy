@@ -61,7 +61,7 @@ public class Assets implements Disposable, AssetErrorListener {
                 public final AtlasRegion background;
 
                 public AssetBackground(TextureAtlas atlas) {
-                	background = atlas.findRegion("background");
+                	background = atlas.findRegion("b");
                 }
         }
 

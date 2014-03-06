@@ -10,7 +10,7 @@ public class Background {
 	}
 	
 	public void render(SpriteBatch batch){
-		batch.draw(backgroundRegion.getTexture(), 0, 0,12.8f, 12.8f,backgroundRegion.getRegionX(),backgroundRegion.getRegionY(),backgroundRegion.getRegionWidth(), backgroundRegion.getRegionHeight(), false, false);
+		batch.draw(backgroundRegion.getTexture(), 0, 0,19.504761f, 16.6095f,backgroundRegion.getRegionX(),backgroundRegion.getRegionY(),backgroundRegion.getRegionWidth(), backgroundRegion.getRegionHeight(), false, false);
 	}
 }
 

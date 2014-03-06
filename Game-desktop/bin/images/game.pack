@@ -3,9 +3,16 @@ game.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-background
+b
   rotate: false
   xy: 2, 2
+  size: 2048, 1744
+  orig: 2048, 1744
+  offset: 0, 0
+  index: -1
+background
+  rotate: false
+  xy: 2052, 722
   size: 1024, 1024
   orig: 1024, 1024
   offset: 0, 0

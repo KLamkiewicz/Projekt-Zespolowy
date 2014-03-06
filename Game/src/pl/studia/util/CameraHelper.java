@@ -16,12 +16,10 @@ public class CameraHelper {
 	private float 	shakeTime=0;
 	private float 	shakeX;
 	private float 	shakeY;
-
+	private boolean pom=false;
 	public CameraHelper(){
 		position = new Vector2();
 	}
-	
-	
 	
 	
 	public Sprite getCharacter() {
@@ -65,14 +63,24 @@ public class CameraHelper {
 	//DebugMode(FreeMode) has no shakeCam - null pointer exception prevention
 	public void shakeCam(float deltaTime){
 		if (currentShakeTime <= shakeTime && hasCharacter()) {
-
-			shakeX = MathUtils.random(character.getX()-0.2f,character.getX()+0.2f);
+			
+			shakeX = MathUtils.random(character.getX()-0.1f,character.getX()+0.1f);
 			shakeY = MathUtils.random(character.getY()-0.1f,character.getY()+ 0.1f);
-
+		
+		/*	if(this.position.x<shakeX)
+				this.position.x += 0.05;
+			if(this.position.x>shakeX)
+				this.position.x -= 0.05;
 			
-			this.position.x = shakeX;
+			if(this.position.y<shakeY)
+				this.position.y += 0.05;
+			if(this.position.y>shakeY)
+				this.position.y -= 0.05;*/
+			
+			
+			
 			this.position.y = shakeY;
-			
+			this.position.x = shakeX;
 			
 			this.currentShakeTime+=deltaTime;		
 		}

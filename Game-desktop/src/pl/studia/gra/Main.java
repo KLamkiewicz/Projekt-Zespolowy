@@ -31,8 +31,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		
 		cfg.title = "Game";
-		cfg.useGL20 = false;
-		cfg.fullscreen=false;
+		cfg.useGL20 = true;
+		cfg.fullscreen=true;
 		cfg.width = screenDimension.width;
 		cfg.height= screenDimension.height;
 	

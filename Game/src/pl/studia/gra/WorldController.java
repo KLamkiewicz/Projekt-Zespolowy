@@ -76,7 +76,7 @@ public class WorldController extends InputAdapter{
     		Gdx.app.debug(TAG, "Camera follow enabled: " + cameraHelper.hasCharacter());
     }
 		else if(keycode==Keys.Q){
-			cameraHelper.evokeShakeCam(2);
+			cameraHelper.evokeShakeCam(10);
 			Gdx.app.debug(TAG, "Shake enabled");
 		}
 		return false;
