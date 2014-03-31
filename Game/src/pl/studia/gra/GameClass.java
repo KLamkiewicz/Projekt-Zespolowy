@@ -1,9 +1,12 @@
 package pl.studia.gra;
 
 
+import pl.studia.objects.Assets;
+
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 
 
 
@@ -21,6 +24,7 @@ public class GameClass implements ApplicationListener {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		
 		//Initialize controller and renderer
+		Assets.instance.init(new AssetManager());
 		worldController = new WorldController();
 		worldRenderer = new WorldRenderer(worldController);
 		

@@ -46,7 +46,7 @@ public class Assets implements Disposable, AssetErrorListener {
                         t.setFilter(TextureFilter.Linear, TextureFilter.Linear);
                 // create game resource objects
                 backgroundAsset = new AssetBackground(atlas);
-                //platformAsset = new AssetPlatform(atlas);
+                platformAsset = new AssetPlatform(atlas);
         }
 
         

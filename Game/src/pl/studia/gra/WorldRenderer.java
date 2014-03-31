@@ -2,8 +2,10 @@ package pl.studia.gra;
 
 import pl.studia.objects.Assets;
 import pl.studia.objects.Background;
+import pl.studia.objects.ingame.Platform;
 import pl.studia.util.Constants;
 import pl.studia.util.ResolutionManager;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
@@ -34,6 +36,7 @@ public class WorldRenderer implements Disposable{
 	private Sprite 				sprite2;
 	private Texture 			texture2;
 	private Background			background;
+	private Platform			platform;
 	
 	public WorldRenderer(WorldController worldController){
 		this.worldController=worldController;
@@ -41,7 +44,7 @@ public class WorldRenderer implements Disposable{
 	}
 	
 	private void init(){
-		batch =new SpriteBatch();
+		batch = new SpriteBatch();
 		
 		//texture = new Texture(Gdx.files.internal("data/kk.jpg"));
 		texture2 = new Texture(Gdx.files.internal("data/libgdx.png"));
@@ -50,7 +53,7 @@ public class WorldRenderer implements Disposable{
 		texture2.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
 		//sprite = new Sprite(texture);
-		sprite2=new Sprite(texture2);
+		sprite2 = new Sprite(texture2);
 		
 	
 		
@@ -58,18 +61,18 @@ public class WorldRenderer implements Disposable{
 		cam.position.set(Constants.VIEWPORT_WIDTH/2f,Constants.VIEWPORT_HEIGHT/2f, 0); // 3 parametr nie istotny przy 2d
 		cam.update();
 	
-		cameraGUI =new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);	
+		cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);	
 		cameraGUI.position.set(0,0, 0);
 		cameraGUI.setToOrtho(false); 
-		
-		Assets.instance.init(new AssetManager());
+	
 		background = new Background();
+		platform = new Platform();
 	}
 	
 	
 	
 	
-	public void render(){
+	public void render() {
  		
       	//Apply settings of helper to main camera
 		
@@ -83,6 +86,8 @@ public class WorldRenderer implements Disposable{
         batch.setProjectionMatrix(cam.combined);
 		batch.begin();
 		background.render(batch);
+		platform.render(batch);
+		worldController.level.render(batch);
 		batch.end();
 
 		renderTestObjects();
@@ -90,8 +95,7 @@ public class WorldRenderer implements Disposable{
 	
 	}
 	
-	private void renderTestObjects(){
-	
+	private void renderTestObjects() {
 		
 		batch.begin();
 		for(Sprite sprite: worldController.testSprites){
@@ -107,26 +111,26 @@ public class WorldRenderer implements Disposable{
 		batch.end();
 	}
 	
-	public void resize(int width, int height){
+	public void resize(int width, int height) {
 
-		cam.viewportWidth=(Constants.VIEWPORT_HEIGHT/height)*width;
-		cam.position.x=cam.viewportWidth/2f;
+		cam.viewportWidth = (Constants.VIEWPORT_HEIGHT/height)*width;
+		cam.position.x = cam.viewportWidth/2f;
 		cam.update();
 
-		cameraGUI.viewportHeight=Constants.VIEWPORT_GUI_HEIGHT;
+		cameraGUI.viewportHeight = Constants.VIEWPORT_GUI_HEIGHT;
 		cameraGUI.viewportWidth = (Constants.VIEWPORT_GUI_HEIGHT / (float)height) * (float)width;
 		cameraGUI.position.set(cameraGUI.viewportWidth / 2, cameraGUI.viewportHeight / 2, 0);
 		cameraGUI.update();
 
 		// Reposition of the GUI element - change only first two parameters
-		float x =ResolutionManager.calculateX(ResolutionManager.HorizontalAlignment.LEFT, 0, sprite2.getHeight(), cameraGUI.viewportWidth);
-		float y=ResolutionManager.calculateY(ResolutionManager.VerticalAlignment.TOP, 0, sprite2.getHeight(), cameraGUI.viewportHeight);
+		float x = ResolutionManager.calculateX(ResolutionManager.HorizontalAlignment.LEFT, 0, sprite2.getHeight(), cameraGUI.viewportWidth);
+		float y = ResolutionManager.calculateY(ResolutionManager.VerticalAlignment.TOP, 0, sprite2.getHeight(), cameraGUI.viewportHeight);
 	    sprite2.setPosition(x,y);
 		
 	}
 	
 	@Override 
-	public void dispose(){
+	public void dispose() {
 		batch.dispose();
 		//texture.dispose();
 	}

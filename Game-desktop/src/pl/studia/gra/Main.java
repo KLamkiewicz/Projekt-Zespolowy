@@ -32,7 +32,7 @@ public class Main {
 		
 		cfg.title = "Game";
 		cfg.useGL20 = true;
-		cfg.fullscreen=true;
+		cfg.fullscreen = false;
 		cfg.width = screenDimension.width;
 		cfg.height= screenDimension.height;
 	

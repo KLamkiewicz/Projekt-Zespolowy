@@ -1,12 +1,12 @@
 package pl.studia.gra;
 
+import pl.studia.objects.Level;
 import pl.studia.util.CameraHelper;
 import pl.studia.util.Constants;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -20,6 +20,7 @@ public class WorldController extends InputAdapter{
 	public Sprite[] 			testSprites;
 	public int 					selectedSprite;
 	public Texture 				texture;
+	public Level				level;
 	
 	
 	public WorldController(){
@@ -34,7 +35,12 @@ public class WorldController extends InputAdapter{
 		Gdx.input.setInputProcessor(this);
 		cameraHelper = new CameraHelper();
 		initTestObjects();
+		initLevel();
 		cameraHelper.setCharacter(testSprites[0]);
+	}
+	
+	private void initLevel() {
+		level = new Level(Constants.LEVEL_01);
 	}
 	
 	

@@ -18,8 +18,7 @@ public class Constants {
 	
 	
 	public static final String TEXTURE_ATLAS_OBJECTS = "images/game.pack";
+	public static final String LEVEL_01 = "levels/level_01.png";
 	
 	
-
-
 }
