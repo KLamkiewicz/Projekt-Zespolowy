@@ -27,7 +27,6 @@ public class WorldController extends InputAdapter{
 		init();
 	}
 	
-	
 	/*Initialization in separate method instead of in constructor,
 	* this approach can greatly reduce 
 	* the interruptions by the Garbage Collector*/
@@ -43,21 +42,17 @@ public class WorldController extends InputAdapter{
 		level = new Level(Constants.LEVEL_01);
 	}
 	
-	
 	/*This method contain the game logic and will 
 	* be called several hundred times per second. 
 	* It requiers delta time so that it can apply 
 	* updates to the game world according to the 
 	* fraction of time */
-	
 	public void update (float deltaTime){
-		updateTestObjects(deltaTime);
+		//updateTestObjects(deltaTime);
 		cameraHelper.shakeCam(deltaTime);
 		handleInput(deltaTime);
+		level.update(deltaTime);
 	}
-	
-	
-	
 	
 	@Override
 	public boolean keyUp(int keycode) {
@@ -93,82 +88,74 @@ public class WorldController extends InputAdapter{
 	
 	private void initTestObjects(){
 		
-		//Create new array for 5 sprites
-		testSprites = new Sprite[5];
-		texture = new Texture(Gdx.files.internal("data/test.png"));
-		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
-		// Create new sprites using a random texture region
-				for (int i = 0; i < testSprites.length; i++) {
-					Sprite spr = new Sprite(texture);
-					// Define sprite size to be 1m x 1m in game world
-					spr.setSize(1.52f, 1.52f);
-					// Set origin to spriteÕs center
-					spr.setOrigin(spr.getWidth() / 2.0f, spr.getHeight() / 2.0f);
-					// Calculate random position for sprite
-					float randomX = MathUtils.random(0f, 1.0f);
-					float randomY = MathUtils.random(0f, 1.0f);
-					spr.setPosition(randomX, randomY);
-					// Put new sprite into array
-					testSprites[i] = spr;
-				}
-				// Set first sprite as selected one
-				selectedSprite = 0;
-			}
+	//Create new array for 5 sprites
+	testSprites = new Sprite[5];
+	texture = new Texture(Gdx.files.internal("data/test.png"));
+	texture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
+	// Create new sprites using a random texture region
+		for (int i = 0; i < testSprites.length; i++) {
+			Sprite spr = new Sprite(texture);
+			// Define sprite size to be 1m x 1m in game world
+			spr.setSize(1.52f, 1.52f);
+			// Set origin to spriteÕs center
+			spr.setOrigin(spr.getWidth() / 2.0f, spr.getHeight() / 2.0f);
+			// Calculate random position for sprite
+			float randomX = MathUtils.random(0f, 1.0f);
+			float randomY = MathUtils.random(0f, 1.0f);
+			spr.setPosition(randomX, randomY);
+			// Put new sprite into array
+			testSprites[i] = spr;
+		}
+		// Set first sprite as selected one
+		selectedSprite = 0;
+	}
 
+	private void updateTestObjects(float deltaTime){
 		
+		// Get current rotation from selected sprite
+		float rotation = testSprites[selectedSprite].getRotation();
+		//Rotate sprite by 90 degrees per second
+		rotation+=90*deltaTime;
+		rotation%=360;
+		testSprites[selectedSprite].setRotation(rotation);
 		
-		private void updateTestObjects(float deltaTime){
-			
-			// Get current rotation from selected sprite
-			float rotation = testSprites[selectedSprite].getRotation();
-			//Rotate sprite by 90 degrees per second
-			rotation+=90*deltaTime;
-			rotation%=360;
-			testSprites[selectedSprite].setRotation(rotation);
-			
-		}
-
+	}
 		
-		private void moveSelectedSprite(float x, float y){
-			testSprites[selectedSprite].translate(x, y);
-		}
-		
-		private void moveCamera(float x, float y){
-			x+=cameraHelper.getPosition().x;
-			y+=cameraHelper.getPosition().y;
-			cameraHelper.setPosition(x,y);
-		}
-		
-		//test method ONLY
-		private void handleInput(float deltaTime){
-		    
-			// Selected Sprite Controls - TEMPORARY
-			if (Gdx.input.isKeyPressed(Keys.LEFT)){
-		    	moveSelectedSprite(-0.2f, 0f);
-		    }
-		    if (Gdx.input.isKeyPressed(Keys.RIGHT))
-		    	moveSelectedSprite(0.2f, 0f);
-		    if (Gdx.input.isKeyPressed(Keys.UP))
-		    	moveSelectedSprite(0f, 0.2f);
-		    if (Gdx.input.isKeyPressed(Keys.DOWN))
-		    	moveSelectedSprite(0f, -0.2f);
-		    // Camera Controls Move
-		    
-		    if (Gdx.input.isKeyPressed(Keys.A)){
-		    	moveCamera(-0.2f, 0f);
-		    }
-		    if (Gdx.input.isKeyPressed(Keys.D))
-		    	moveCamera(0.2f, 0f);
-		    if (Gdx.input.isKeyPressed(Keys.W))
-		    	moveCamera(0f, 0.2f);
-		    if (Gdx.input.isKeyPressed(Keys.S))
-		    	moveCamera(0f, -0.2f);
-		    
-		    
-		}
-		
-		
+	private void moveSelectedSprite(float x, float y){
+		testSprites[selectedSprite].translate(x, y);
+	}
 	
-		
-		
+	private void moveCamera(float x, float y){
+		x+=cameraHelper.getPosition().x;
+		y+=cameraHelper.getPosition().y;
+		cameraHelper.setPosition(x,y);
+	}
+	
+	//test method ONLY
+	private void handleInput(float deltaTime){
+	    
+		// Selected Sprite Controls - TEMPORARY
+		if (Gdx.input.isKeyPressed(Keys.LEFT)){
+	    	moveSelectedSprite(-0.2f, 0f);
+	    }
+	    if (Gdx.input.isKeyPressed(Keys.RIGHT))
+	    	moveSelectedSprite(0.2f, 0f);
+	    if (Gdx.input.isKeyPressed(Keys.UP))
+	    	moveSelectedSprite(0f, 0.2f);
+	    if (Gdx.input.isKeyPressed(Keys.DOWN))
+	    	moveSelectedSprite(0f, -0.2f);
+	    // Camera Controls Move
+	    
+	    if (Gdx.input.isKeyPressed(Keys.A)){
+	    	moveCamera(-0.2f, 0f);
+	    }
+	    if (Gdx.input.isKeyPressed(Keys.D))
+	    	moveCamera(0.2f, 0f);
+	    if (Gdx.input.isKeyPressed(Keys.W))
+	    	moveCamera(0f, 0.2f);
+	    if (Gdx.input.isKeyPressed(Keys.S))
+	    	moveCamera(0f, -0.2f);
+	    
+	}
+			
 }

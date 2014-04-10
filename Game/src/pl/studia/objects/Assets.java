@@ -20,6 +20,7 @@ public class Assets implements Disposable, AssetErrorListener {
         private AssetManager assetManager;
         public AssetBackground backgroundAsset;
         public AssetPlatform platformAsset;
+        public AssetCharacter characterAsset;
 
         // singleton: prevent instantiation from other classes
         private Assets() {
@@ -47,6 +48,7 @@ public class Assets implements Disposable, AssetErrorListener {
                 // create game resource objects
                 backgroundAsset = new AssetBackground(atlas);
                 platformAsset = new AssetPlatform(atlas);
+                characterAsset = new AssetCharacter(atlas);
         }
 
         
@@ -75,6 +77,14 @@ public class Assets implements Disposable, AssetErrorListener {
         		
         		public AssetPlatform(TextureAtlas atlas) {
         			platform = atlas.findRegion("platform");
+        		}
+        }
+        
+        public class AssetCharacter{
+        		public final AtlasRegion character;
+        		
+        		public AssetCharacter(TextureAtlas atlas) {
+        			character = atlas.findRegion("morda");
         		}
         }
         

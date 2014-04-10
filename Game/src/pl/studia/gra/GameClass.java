@@ -1,6 +1,5 @@
 package pl.studia.gra;
 
-
 import pl.studia.objects.Assets;
 
 import com.badlogic.gdx.Application;
@@ -8,18 +7,14 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 
-
-
 public class GameClass implements ApplicationListener {
 		
 	private WorldController		worldController;
 	private WorldRenderer		worldRenderer;
 	private boolean				paused;
 
-
 	@Override
 	public void create() {	
-
 		//Set Libgdx log level to DEBUG
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 		
@@ -30,9 +25,7 @@ public class GameClass implements ApplicationListener {
 		
 		//Game world is active on start - Android Optymalization
 		paused = false;
-		
 	}
-
 
 	@Override
 	public void render() {	
@@ -42,7 +35,7 @@ public class GameClass implements ApplicationListener {
 		
 		//Do not update game world when paused
 		if(!paused){
-		worldController.update(Gdx.graphics.getDeltaTime());
+			worldController.update(Gdx.graphics.getDeltaTime());
 		}
 		
 		worldRenderer.render();

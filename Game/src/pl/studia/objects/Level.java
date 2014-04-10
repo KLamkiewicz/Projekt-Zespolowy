@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.studia.objects.ingame.Platform;
-
+import pl.studia.objects.ingame.Character;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Level {
 	public static final String TAG = Level.class.getName();
-	Platform p = new Platform();
+	// Game objects
+	Platform p;
+	public List<Platform> platforms;
+	public Character character;
 	
 	/*
 	 *	Enum - kazdy obiekt ma przydzielony konkretny kolor (R, G, B)
@@ -22,7 +25,8 @@ public class Level {
 	
 	public enum BLOCK_TYPE {
 		EMPTY(0, 0, 0), // black
-		PLATFORM(0, 0, 255); 
+		PLATFORM(0, 0, 255),
+		SPAWN(255, 255, 255); //white spawn point
 		
 		private int color;
 		/* Each channel is represented by 8 bits
@@ -45,15 +49,14 @@ public class Level {
 		}
 	}
 	
-	// Game objects
-	public List<Platform> platforms;
-	
 	public Level (String filename) {
 		init(filename);
 	}
 	
 	private void init (String filename) {
+		p = new Platform();
 		platforms = new ArrayList<Platform>();
+		character = null;
 		//Load the level image
 		Pixmap pixmap = new Pixmap(Gdx.files.internal(filename));
 		//int lastPixel = -1;
@@ -74,13 +77,17 @@ public class Level {
 				 */
 				if (BLOCK_TYPE.EMPTY.sameColor(currentPixel)) {
 
-				}
-				
+				}				
 				else if (BLOCK_TYPE.PLATFORM.sameColor(currentPixel)) {
 					obj = new Platform();
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					platforms.add((Platform)obj);
 				}	
+				else if(BLOCK_TYPE.SPAWN.sameColor(currentPixel)) {
+					obj = new Character();
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					character = (Character) obj;
+				}
 			}
 		}
 		//Free memory
@@ -92,6 +99,11 @@ public class Level {
 		for(Platform p : platforms){
 			p.render(batch);
 		}
+		character.render(batch);
+	}
+	
+	public void update(float deltaTime){
+		character.update(deltaTime);
 	}
 	
 }

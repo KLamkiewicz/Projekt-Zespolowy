@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class WorldRenderer implements Disposable{
 
-	
 	private OrthographicCamera 	cam;
 	private OrthographicCamera 	cameraGUI;
 	private SpriteBatch 		batch;
@@ -28,7 +27,6 @@ public class WorldRenderer implements Disposable{
 	 * Testing debugmode variable
 	 */
 	
-	
 	/*Temporary ! It shouldn't be here 
 	 * just for testing !
 	 * */
@@ -36,7 +34,6 @@ public class WorldRenderer implements Disposable{
 	private Sprite 				sprite2;
 	private Texture 			texture2;
 	private Background			background;
-	private Platform			platform;
 	
 	public WorldRenderer(WorldController worldController){
 		this.worldController=worldController;
@@ -54,9 +51,6 @@ public class WorldRenderer implements Disposable{
 
 		//sprite = new Sprite(texture);
 		sprite2 = new Sprite(texture2);
-		
-	
-		
 		cam = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);	
 		cam.position.set(Constants.VIEWPORT_WIDTH/2f,Constants.VIEWPORT_HEIGHT/2f, 0); // 3 parametr nie istotny przy 2d
 		cam.update();
@@ -64,18 +58,13 @@ public class WorldRenderer implements Disposable{
 		cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);	
 		cameraGUI.position.set(0,0, 0);
 		cameraGUI.setToOrtho(false); 
-	
 		background = new Background();
-		platform = new Platform();
+
 	}
-	
-	
-	
 	
 	public void render() {
  		
       	//Apply settings of helper to main camera
-		
  		worldController.cameraHelper.applyTo(cam);
         cameraGUI.update();
 
@@ -86,7 +75,6 @@ public class WorldRenderer implements Disposable{
         batch.setProjectionMatrix(cam.combined);
 		batch.begin();
 		background.render(batch);
-		platform.render(batch);
 		worldController.level.render(batch);
 		batch.end();
 
@@ -134,8 +122,5 @@ public class WorldRenderer implements Disposable{
 		batch.dispose();
 		//texture.dispose();
 	}
-	
-
-
 
 }
