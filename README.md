@@ -49,7 +49,7 @@ Imie | Nazwisko | Rola
 *Agnieszka* | *Rzeszuto* | **Web Developer, Level Designer, Documentation writer, Game Tester**
 *Sabina* | *Litke* | **Web Developer , Level Designer , Documentation writer, Game Tester**
 *Jarosław* | *Cimoch* | **3D Artist, Second, Main Developer**
-*Krzysztof* | *Lamkiewicz* | **Main Developer, Kernel Developer**
+*Krzysztof* | *Lamkiewicz* | **Main Developer**
 
 
 
@@ -110,34 +110,11 @@ Gra ma być domyślnie uruchamiana w wersji pełno ekranowej. Zakładamy możliw
 
 7. Informacje dla użytkownika:
 Projekt będzie posiadał swoją stronę internetową, która będzie zawierać instrukcję, dokumentację , materiały reklamowe gry, odnośniki do pobrania różnych wersji, oraz wersje demonstracyjną gry w html 5. 
-8. Wykorzystane technologie:
 
-Technologie Programistyczne
-•	Framework – Libgdx
-•	Język – JAVA 7
-•	IDE – Eclipse 
-•	Notepad++
 
-Technologie graficzne :
-•	Autodesk 3DsMax 2014
-•	Blender
-•	Sculptris 
-•	Chaos Group Vray / Corona
-•	Krita / Adobe Photoshop
+Jak uruchomic
+=====
 
-Technologie pomocnicze:
-•	Github – system kontroli wersji
-•	HTML , javascript, Bootstrap
-•	Trello.com
-•	MS Office
-•	Dropbox
+Eclipse -> Run -> Run configurations -> Arguments -> VM Arguments -> -Xms512M -> Apply
 
-Platforma Docelowa – Desktop (priorytet):
-•	Windows XP – 8.1 
-•	Linux 
-•	Mac OS X
-
-Platformy Dodatkowe - Mobile:
-•	Android 4.0 – Tablety 
-•	HTML 5 – przeglądarki internetowe
-
+Dociagniecie assetow https://www.dropbox.com/home/PROJEKT%20ZESPOLOWY%20-%20planowanie/assets-raw wrzucic do Game-desktop assets-raw , w przypadku błedów w kompilacji odświeżyć Game-android
