@@ -23,7 +23,7 @@ public class Main {
 			Settings settings = new Settings();
 			settings.maxWidth = 4096;
 			settings.maxHeight = 4096;
-			settings.debug = drawDebugOutline;
+			settings.debug = !drawDebugOutline;
 			TexturePacker2.process(settings, "assets-raw/images",
 					"../Game-android/assets/images", "game.pack");
 		}

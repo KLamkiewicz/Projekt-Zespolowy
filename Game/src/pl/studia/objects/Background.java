@@ -1,16 +1,35 @@
 package pl.studia.objects;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Background {
 	private TextureRegion backgroundRegion;
+	private List<TextureRegion> backgroundRegions;
 	
 	public Background(){
-		backgroundRegion = Assets.instance.backgroundAsset.background;
+		backgroundRegions = new ArrayList<TextureRegion>();
+		for(AtlasRegion region : Assets.instance.backgroundAsset.backgrounds){
+			backgroundRegions.add(region);
+		}
+		
+		//backgroundRegion = Assets.instance.backgroundAsset.background;
 	}
 	
 	public void render(SpriteBatch batch){
-		batch.draw(backgroundRegion.getTexture(), 0, 0,19.504761f, 16.6095f,backgroundRegion.getRegionX(),backgroundRegion.getRegionY(),backgroundRegion.getRegionWidth(), backgroundRegion.getRegionHeight(), false, false);
+		float width = 19.504761f;
+		float height = 16.6095f;
+		float x = 0f;
+		float y = 0f;
+		
+		for(TextureRegion backgroundRegion : backgroundRegions){
+			batch.draw(backgroundRegion.getTexture(), x, y, 19.504761f, 16.6095f,backgroundRegion.getRegionX(),backgroundRegion.getRegionY(),backgroundRegion.getRegionWidth(), backgroundRegion.getRegionHeight(), false, false);
+			//To remove space between the rendered backgrounds 
+			x+=width - (0.01f);
+		}
 	}
 }
 

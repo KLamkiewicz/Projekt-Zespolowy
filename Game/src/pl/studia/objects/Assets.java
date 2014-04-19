@@ -1,5 +1,8 @@
 package pl.studia.objects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pl.studia.util.Constants;
 
 import com.badlogic.gdx.Gdx;
@@ -65,10 +68,17 @@ public class Assets implements Disposable, AssetErrorListener {
 
        
         public class AssetBackground{
-                public final AtlasRegion background;
+                //public final AtlasRegion background;
+                public final List<AtlasRegion> backgrounds;
 
                 public AssetBackground(TextureAtlas atlas) {
-                	background = atlas.findRegion("b");
+                	backgrounds = new ArrayList<AtlasRegion>();
+                	backgrounds.add(atlas.findRegion("background1"));
+                	backgrounds.add(atlas.findRegion("background2"));
+                	backgrounds.add(atlas.findRegion("background3"));
+                	backgrounds.add(atlas.findRegion("background4"));
+                	
+                	//background = atlas.findRegion("background3");
                 }
         }
         

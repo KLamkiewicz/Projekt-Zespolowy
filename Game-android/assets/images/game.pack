@@ -5,29 +5,62 @@ filter: Nearest,Nearest
 repeat: none
 b
   rotate: false
-  xy: 2, 132
+  xy: 2, 1999
   size: 2048, 1744
   orig: 2048, 1744
   offset: 0, 0
   index: -1
-background
+background1
   rotate: false
-  xy: 2052, 852
-  size: 1024, 1024
-  orig: 1024, 1024
+  xy: 2, 262
+  size: 2000, 1735
+  orig: 2000, 1735
+  offset: 0, 0
+  index: -1
+background2
+  rotate: false
+  xy: 2052, 2008
+  size: 2000, 1735
+  orig: 2000, 1735
+  offset: 0, 0
+  index: -1
+background3
+  rotate: false
+  xy: 2052, 271
+  size: 2000, 1735
+  orig: 2000, 1735
   offset: 0, 0
   index: -1
 morda
   rotate: false
-  xy: 2, 2
+  xy: 2, 132
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 platform
   rotate: false
-  xy: 2052, 722
+  xy: 2, 2
   size: 128, 128
   orig: 128, 128
+  offset: 0, 0
+  index: -1
+
+game2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background
+  rotate: false
+  xy: 2004, 713
+  size: 1024, 1024
+  orig: 1024, 1024
+  offset: 0, 0
+  index: -1
+background4
+  rotate: false
+  xy: 2, 2
+  size: 2000, 1735
+  orig: 2000, 1735
   offset: 0, 0
   index: -1
