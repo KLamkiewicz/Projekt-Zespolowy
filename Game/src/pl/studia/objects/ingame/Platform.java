@@ -21,6 +21,7 @@ public class Platform extends GameObject {
 		position = new Vector2(2f, 2f);
 		dimension = new Vector2(1f, 1f);
 		bounds = new Rectangle();
+		bounds.set(0, 0, dimension.x, dimension.y);
 	}
 	
 	@Override
