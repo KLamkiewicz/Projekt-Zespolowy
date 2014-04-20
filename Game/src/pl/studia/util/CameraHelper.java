@@ -1,5 +1,8 @@
 package pl.studia.util;
 
+import pl.studia.gra.WorldController;
+import pl.studia.objects.ingame.Character;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -11,7 +14,7 @@ public class CameraHelper {
 	 * Character position is defined by the character.getX() and character.getY()
 	 */
 	private Vector2 position;
-	private Sprite	character;
+	private Character	character;
 	private float 	currentShakeTime=1;
 	private float 	shakeTime=0;
 	private float 	shakeX;
@@ -19,14 +22,15 @@ public class CameraHelper {
 	private boolean pom=false;
 	public CameraHelper(){
 		position = new Vector2();
+		
 	}
 	
 	
-	public Sprite getCharacter() {
+	public Character getCharacter() {
 		return character;
 	}
 
-	public void setCharacter(Sprite character) {
+	public void setCharacter(Character character) {
 		this.character = character;
 	}
 	
@@ -41,7 +45,7 @@ public class CameraHelper {
 	/*
 	 * Overload method Check if camera has a specified target in a parameter
 	 */
-	public boolean hasCharacter(Sprite character){
+	public boolean hasCharacter(Character character){
 		return this.character!=null && this.character.equals(character);
 	}
 	
@@ -63,9 +67,9 @@ public class CameraHelper {
 	//DebugMode(FreeMode) has no shakeCam - null pointer exception prevention
 	public void shakeCam(float deltaTime){
 		if (currentShakeTime <= shakeTime && hasCharacter()) {
-			
-			shakeX = MathUtils.random(character.getX()-0.1f,character.getX()+0.1f);
-			shakeY = MathUtils.random(character.getY()-0.1f,character.getY()+ 0.1f);
+
+			shakeX = MathUtils.random(character.position.x-0.1f,character.position.x+0.1f);
+			shakeY = MathUtils.random(character.position.y-0.1f,character.position.y+ 0.1f);
 		
 		/*	if(this.position.x<shakeX)
 				this.position.x += 0.05;
@@ -106,8 +110,8 @@ public class CameraHelper {
 			camera.position.y = this.position.y;
 			camera.update();
 		} else {
-			camera.position.x = character.getX();
-			camera.position.y = character.getY();
+			camera.position.x = character.position.x;
+			camera.position.y = character.position.y;
 
 			if (currentShakeTime <= shakeTime) {
 				camera.position.x = this.position.x;
