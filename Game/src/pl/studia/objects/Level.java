@@ -81,6 +81,7 @@ public class Level {
 				else if (BLOCK_TYPE.PLATFORM.sameColor(currentPixel)) {
 					obj = new Platform();
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
 					platforms.add((Platform)obj);
 				}	
 				else if(BLOCK_TYPE.SPAWN.sameColor(currentPixel)) {
