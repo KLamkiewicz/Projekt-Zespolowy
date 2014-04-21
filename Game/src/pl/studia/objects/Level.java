@@ -3,9 +3,6 @@ package pl.studia.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.studia.objects.ingame.Plat1;
-import pl.studia.objects.ingame.Plat5;
-import pl.studia.objects.ingame.Plat6;
 import pl.studia.objects.ingame.Platform;
 import pl.studia.objects.ingame.Character;
 
@@ -16,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Level {
 	public static final String TAG = Level.class.getName();
 	// Game objects
-	Plat1 p;
 	public List<GameObject> platforms;
 	public Character character;
 	
@@ -85,6 +81,8 @@ public class Level {
 				}				
 				else if (BLOCK_TYPE.PLATFORM.sameColor(currentPixel)) {
 					obj = new Platform();
+					//Here we set the asset
+					obj.platform = Assets.instance.platformAsset.platform;
 					offsetHeight = -2.5f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					//obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
@@ -99,12 +97,13 @@ public class Level {
 					character = (Character) obj;
 				}
 				else if (BLOCK_TYPE.PLATFORMLONG.sameColor(currentPixel)) {
-					obj = new Plat6();
+					obj = new Platform();
+					obj.platform = Assets.instance.plat6.platform;
 					offsetHeight = -2.5f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					obj.dimension.set(5f, 1f);
 					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
-					platforms.add((Plat6)obj);
+					platforms.add((Platform)obj);
 				}	
 			}
 		}

@@ -1,6 +1,7 @@
 package pl.studia.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -14,6 +15,7 @@ public abstract class GameObject {
 	public Vector2 friction;			//Object friction
 	public Vector2 acceleration;		//Object acceleration
 	public Rectangle bounds;			//Object area used to determine collision
+	public TextureRegion platform;
 	
 
 	public GameObject(){

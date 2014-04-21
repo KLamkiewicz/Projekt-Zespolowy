@@ -9,7 +9,7 @@ import pl.studia.objects.Assets;
 import pl.studia.objects.GameObject;
 
 public class Platform extends GameObject {
-	private TextureRegion platform;
+	
 
 	public Platform(){
 		init();
@@ -31,9 +31,14 @@ public class Platform extends GameObject {
 		batch.draw(region.getTexture(), position.x, position.y, dimension.x, dimension.y, region.getRegionX(), region.getRegionY(), region.getRegionWidth(), region.getRegionHeight(), false, false);
 		
 	}
-	
-	void test(){
-		System.out.println("Herro");
+
+	public TextureRegion getPlatform() {
+		return platform;
 	}
+
+	public void setPlatform(TextureRegion platform) {
+		this.platform = platform;
+	}
+	
 	
 }
