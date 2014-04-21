@@ -27,6 +27,12 @@ public class Level {
 		EMPTY(0, 0, 0), // black
 		PLATFORM(0, 0, 255),
 		PLATFORMLONG(255, 0, 0),
+		PLATFORM_TYPE1(155, 220,255),
+		PLATFORM_TYPE2(155, 240, 255),
+		PLATFORM_TYPE3(155, 120, 255),
+		PLATFORM_TYPE4(155, 80, 255),
+		PLATFORM_TYPE5(155, 40, 255),
+		PLATFORM_TYPE6(155, 0, 255),
 		SPAWN(255, 255, 255); //white spawn point
 		
 		private int color;
@@ -85,7 +91,7 @@ public class Level {
 					obj.platform = Assets.instance.platformAsset.platform;
 					offsetHeight = -2.5f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
-					//obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y-0.2f);
 					platforms.add((Platform)obj);
 				
 					//platforms.add((Plat5)obj);
@@ -102,9 +108,20 @@ public class Level {
 					offsetHeight = -2.5f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					obj.dimension.set(5f, 1f);
-					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y-0.2f);
 					platforms.add((Platform)obj);
-				}	
+				}
+				
+				else if (BLOCK_TYPE.PLATFORM_TYPE2.sameColor(currentPixel)) {
+					obj = new Platform();
+					obj.platform = Assets.instance.plat2.platform;
+					offsetHeight = -2.5f;
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					obj.dimension.set(2f, 1.8f);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y-0.2f);
+					platforms.add((Platform)obj);
+				}
+				
 			}
 		}
 		//Free memory
@@ -113,10 +130,11 @@ public class Level {
 	
 	//Render the generated items
 	public void render (SpriteBatch batch) {
-		character.render(batch);
+		
 		for(GameObject p : platforms){
 			p.render(batch);
 		}
+		character.render(batch);
 	}
 	
 	public void update(float deltaTime){

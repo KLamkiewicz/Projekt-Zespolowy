@@ -5,6 +5,7 @@ import pl.studia.objects.Level;
 import pl.studia.objects.ingame.Character;
 import pl.studia.objects.ingame.Character.JUMP_STATE;
 import pl.studia.objects.ingame.Platform;
+import pl.studia.screens.DirectedGame;
 import pl.studia.util.CameraHelper;
 import pl.studia.util.Constants;
 import pl.studia.objects.ingame.*;
@@ -19,9 +20,11 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+
 public class WorldController extends InputAdapter{
 
 	private static final String TAG = WorldController.class.getName();
+	private DirectedGame 		game;
 	public CameraHelper 		cameraHelper;
 	public Sprite[] 			testSprites;
 	public int 					selectedSprite;
@@ -29,7 +32,8 @@ public class WorldController extends InputAdapter{
 	public Level				level;
 	
 	
-	public WorldController(){
+	public WorldController(DirectedGame game){
+		this.game=game;
 		init();
 	}
 	
@@ -183,7 +187,7 @@ public class WorldController extends InputAdapter{
 		 * Because our first rectangle will always be our character we can just set it now
 		 * To define a rectangle we need the its bottom left corner position and its width and height
 		 */
-		r1.set(level.character.position.x, level.character.position.y, level.character.bounds.width, level.character.bounds.height);
+		r1.set(level.character.position.x+0.2f, level.character.position.y, level.character.bounds.width-0.4f, level.character.bounds.height);
 	
 		/*
 		 * In here we will loop through all of our objects, setting the r2

@@ -20,7 +20,7 @@ public class GameClass implements ApplicationListener {
 		
 		//Initialize controller and renderer
 		Assets.instance.init(new AssetManager());
-		worldController = new WorldController();
+		//worldController = new WorldController();
 		worldRenderer = new WorldRenderer(worldController);
 		
 		//Game world is active on start - Android Optymalization

@@ -3,6 +3,8 @@ package pl.studia.gra;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import pl.studia.GameMain;
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.tools.imagepacker.TexturePacker2;
@@ -37,6 +39,6 @@ public class Main {
 		cfg.width = screenDimension.width;
 		cfg.height= screenDimension.height;
 	
-		new LwjglApplication(new GameClass(), cfg);
+		new LwjglApplication(new GameMain(), cfg);
 	}
 }
