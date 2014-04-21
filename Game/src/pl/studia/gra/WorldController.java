@@ -1,5 +1,6 @@
 package pl.studia.gra;
 
+import pl.studia.objects.GameObject;
 import pl.studia.objects.Level;
 import pl.studia.objects.ingame.Character;
 import pl.studia.objects.ingame.Character.JUMP_STATE;
@@ -187,7 +188,7 @@ public class WorldController extends InputAdapter{
 		/*
 		 * In here we will loop through all of our objects, setting the r2
 		 */
-		for(Platform platform : level.platforms){
+		for(GameObject platform : level.platforms){
 			r2.set(platform.position.x, platform.position.y, platform.bounds.width, platform.bounds.height);
 			/*
 			 * Here we check the overlapping, if there is none we loop to the other object
@@ -203,7 +204,7 @@ public class WorldController extends InputAdapter{
 	/*
 	 * This method is called where we detect the character collision with Platform
 	 */
-	public void characterCollisionWithPlatform(Platform platform){
+	public void characterCollisionWithPlatform(GameObject platform){
 		//Create reference to character so we can call character instead of level.character
 		Character character = level.character;
 		

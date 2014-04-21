@@ -32,4 +32,8 @@ public class Platform extends GameObject {
 		
 	}
 	
+	void test(){
+		System.out.println("Herro");
+	}
+	
 }

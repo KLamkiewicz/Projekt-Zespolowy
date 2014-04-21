@@ -34,6 +34,7 @@ public class Plat5 extends GameObject {
 		
 	}
 	
+
 	
 	
 	

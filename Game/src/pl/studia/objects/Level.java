@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.studia.objects.ingame.Plat1;
+import pl.studia.objects.ingame.Plat5;
+import pl.studia.objects.ingame.Plat6;
 import pl.studia.objects.ingame.Platform;
 import pl.studia.objects.ingame.Character;
 
@@ -15,7 +17,7 @@ public class Level {
 	public static final String TAG = Level.class.getName();
 	// Game objects
 	Plat1 p;
-	public List<Platform> platforms;
+	public List<GameObject> platforms;
 	public Character character;
 	
 	/*
@@ -28,6 +30,7 @@ public class Level {
 	public enum BLOCK_TYPE {
 		EMPTY(0, 0, 0), // black
 		PLATFORM(0, 0, 255),
+		PLATFORMLONG(255, 0, 0),
 		SPAWN(255, 255, 255); //white spawn point
 		
 		private int color;
@@ -56,8 +59,8 @@ public class Level {
 	}
 	
 	private void init (String filename) {
-		p = new Plat1();
-		platforms = new ArrayList<Platform>();
+		//p = new Plat1();
+		platforms = new ArrayList<GameObject>();
 		character = null;
 		//Load the level image
 		Pixmap pixmap = new Pixmap(Gdx.files.internal(filename));
@@ -86,6 +89,8 @@ public class Level {
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					//obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
 					platforms.add((Platform)obj);
+				
+					//platforms.add((Plat5)obj);
 				}	
 				else if(BLOCK_TYPE.SPAWN.sameColor(currentPixel)) {
 					obj = new Character();
@@ -93,6 +98,14 @@ public class Level {
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					character = (Character) obj;
 				}
+				else if (BLOCK_TYPE.PLATFORMLONG.sameColor(currentPixel)) {
+					obj = new Plat6();
+					offsetHeight = -2.5f;
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					obj.dimension.set(5f, 1f);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
+					platforms.add((Plat6)obj);
+				}	
 			}
 		}
 		//Free memory
@@ -102,14 +115,14 @@ public class Level {
 	//Render the generated items
 	public void render (SpriteBatch batch) {
 		character.render(batch);
-		for(Platform p : platforms){
+		for(GameObject p : platforms){
 			p.render(batch);
 		}
 	}
 	
 	public void update(float deltaTime){
 		character.update(deltaTime);
-		for(Platform platform : platforms){
+		for(GameObject platform : platforms){
 			platform.update(deltaTime);
 		}
 	}
