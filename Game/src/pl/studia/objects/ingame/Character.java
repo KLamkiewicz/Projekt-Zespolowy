@@ -16,7 +16,7 @@ public class Character extends GameObject{
 	 * JUMP_TIME_MIN defines the minimum time in which our character can be in a jump state
 	 */
 	public float timeJumping;
-	private final float JUMP_TIME_MAX = 0.3f;
+	private final float JUMP_TIME_MAX = 0.5f;
 	private final float JUMP_TIME_MIN = 0.1f;
 	
 	/*
@@ -51,7 +51,7 @@ public class Character extends GameObject{
 		 * Setting the terminal velocity (the maximum speed at which
 		 * our character can travel at most both horizontally and vertically
 		 */
-		terminalVelocity.set(3.0f, 4.0f); 
+		terminalVelocity.set(3.0f, 5.0f); 
 		/*
 		 * Setting the friction for the character, there is no vertical friction
 		 * only horizontal
@@ -68,7 +68,7 @@ public class Character extends GameObject{
 		/*
 		 * Set the character inital state as falling, set time jumping to 0
 		 */
-		jumpState = JUMP_STATE.JUMP_FALLING;
+		jumpState = JUMP_STATE.FALLING;
 		timeJumping = 0;
 	};
 	

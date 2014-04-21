@@ -217,7 +217,7 @@ public class WorldController extends InputAdapter{
 		
 		float overlap = Math.abs(character.position.y - (platform.position.y + platform.bounds.height));
 
-		if (overlap > 0.5f) {
+		if (overlap > 0.25f) {
 			/*
 			 * Here we check which edge has been hit, checking if character horizontal position is greater than
 			 * platform horizontal position plus half of platform width, meaning we can state which side has been hit
@@ -251,13 +251,12 @@ public class WorldController extends InputAdapter{
 			character.jumpState = JUMP_STATE.GROUNDED;
 			break;
 		case JUMP_RISING:
-			character.position.y = platform.position.y + character.bounds.height + character.origin.y;
+			character.position.y = platform.position.y + character.bounds.height;
 			//This removes the ping-pong effect
 			character.jumpState = JUMP_STATE.JUMP_FALLING;
 			break;
 		}
 	}
-	
 	
 
 }
