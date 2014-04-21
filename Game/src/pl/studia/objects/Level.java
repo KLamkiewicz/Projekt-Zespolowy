@@ -80,12 +80,14 @@ public class Level {
 				}				
 				else if (BLOCK_TYPE.PLATFORM.sameColor(currentPixel)) {
 					obj = new Platform();
+					offsetHeight = -2.5f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					//obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
 					platforms.add((Platform)obj);
 				}	
 				else if(BLOCK_TYPE.SPAWN.sameColor(currentPixel)) {
 					obj = new Character();
+					offsetHeight = -3.0f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					character = (Character) obj;
 				}
@@ -97,14 +99,17 @@ public class Level {
 	
 	//Render the generated items
 	public void render (SpriteBatch batch) {
+		character.render(batch);
 		for(Platform p : platforms){
 			p.render(batch);
 		}
-		character.render(batch);
 	}
 	
 	public void update(float deltaTime){
 		character.update(deltaTime);
+		for(Platform platform : platforms){
+			platform.update(deltaTime);
+		}
 	}
 	
 }

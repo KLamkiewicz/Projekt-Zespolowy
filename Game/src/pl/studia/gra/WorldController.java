@@ -207,35 +207,57 @@ public class WorldController extends InputAdapter{
 		//Create reference to character so we can call character instead of level.character
 		Character character = level.character;
 		
-		//Zakomentowane wypycha do gory, odkomentowane w bok
-//		float heightDifference = Math.abs(character.position.y - (platform.position.y + platform.bounds.height));
-//		if (heightDifference > 0.25f) {
-//			boolean hitLeftEdge = character.position.x > (platform.position.x + platform.bounds.width / 2.0f);
-//			if (hitLeftEdge) {
-//				character.position.x = platform.position.x + platform.bounds.width;
-//			} else {
-//				character.position.x = platform.position.x - character.bounds.width;
-//			}
-//			return;
-//		}
+		/*
+		 * Here we check how big is the vertical overlap
+		 * We get an absolute value from the character vertical position minus the sum of platform vertical position
+		 * and platform bounds height
+		 * This gives us a value how much has the character vertically overlapped with the platform
+		 * If the overlap is greater than certain value we check the side collisions, otherwise we check the jumpState
+		 */
 		
-		System.out.println(character.jumpState);
+		float overlap = Math.abs(character.position.y - (platform.position.y + platform.bounds.height));
+
+		if (overlap > 0.5f) {
+			/*
+			 * Here we check which edge has been hit, checking if character horizontal position is greater than
+			 * platform horizontal position plus half of platform width, meaning we can state which side has been hit
+			 * if character horizontal position is greater that means left edge has been hit and the leftEdge equals true,
+			 * otherwise leftEdge is false and the right edge of the platform has been hit
+			 */
+			boolean leftEdge = character.position.x > (platform.position.x + platform.bounds.width / 2.0f);
+			if (leftEdge) {
+				character.position.x = platform.position.x + platform.bounds.width;
+			} else {
+				character.position.x = platform.position.x - character.bounds.width;
+			}
+			return;
+		}
 		
+		/*
+		 * Here we check our character jumpState, only when the overlap is lesser than given value
+		 * If the character is in the JUMP_FALLING state its vertical position will equal to platform vertical position
+		 * plus its height, positioning our character right on top of it, then we change character state to GROUNDED
+		 * If the character is in the JUMP_RISING state (meaning it can hit a platform from the bottom), we change its 
+		 * vertical position to platform vertical position plus character bounds height and its vertical origin, then we change
+		 * the character state to JUMP_FALLING, because it can neither rise or be grounded
+		 */
 		switch (character.jumpState) {
 		case GROUNDED:
 			break;
 		case FALLING:
 		case JUMP_FALLING:
-			//Po skoku nadal sie psuje
 			//character.position.y = platform.position.y + character.bounds.height + character.origin.y;
 			character.position.y = platform.position.y + platform.bounds.height;
 			character.jumpState = JUMP_STATE.GROUNDED;
 			break;
 		case JUMP_RISING:
 			character.position.y = platform.position.y + character.bounds.height + character.origin.y;
+			//This removes the ping-pong effect
+			character.jumpState = JUMP_STATE.JUMP_FALLING;
 			break;
 		}
-		
 	}
 	
+	
+
 }

@@ -63,7 +63,7 @@ public class Character extends GameObject{
 		 * GameObject method updateMotionY, increases the acceleration of the character
 		 * until it reaches its terminal velocity
 		 */
-		acceleration.set(0.0f, -15f);
+		acceleration.set(0.0f, -25f);
 		
 		/*
 		 * Set the character inital state as falling, set time jumping to 0
