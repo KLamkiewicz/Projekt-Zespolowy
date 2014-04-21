@@ -97,7 +97,7 @@ public class Assets implements Disposable, AssetErrorListener {
         }
         
         
-        
+        //Generaly the same code , but needed to distinct platforms 
         public class AssetPlat1{
     		public final AtlasRegion platform;
     		
