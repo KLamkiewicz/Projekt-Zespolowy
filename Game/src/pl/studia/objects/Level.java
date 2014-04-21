@@ -3,8 +3,10 @@ package pl.studia.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.studia.objects.ingame.Plat1;
 import pl.studia.objects.ingame.Platform;
 import pl.studia.objects.ingame.Character;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Level {
 	public static final String TAG = Level.class.getName();
 	// Game objects
-	Platform p;
+	Plat1 p;
 	public List<Platform> platforms;
 	public Character character;
 	
@@ -54,7 +56,7 @@ public class Level {
 	}
 	
 	private void init (String filename) {
-		p = new Platform();
+		p = new Plat1();
 		platforms = new ArrayList<Platform>();
 		character = null;
 		//Load the level image

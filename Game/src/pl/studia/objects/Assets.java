@@ -23,6 +23,13 @@ public class Assets implements Disposable, AssetErrorListener {
         private AssetManager assetManager;
         public AssetBackground backgroundAsset;
         public AssetPlatform platformAsset;
+        public AssetPlat1 plat1;
+        public AssetPlat2 plat2;
+        public AssetPlat3 plat3;
+        public AssetPlat4 plat4;
+        public AssetPlat5 plat5;
+        public AssetPlat6 plat6;
+        public AssetPlat7 plat7;
         public AssetCharacter characterAsset;
 
         // singleton: prevent instantiation from other classes
@@ -51,6 +58,13 @@ public class Assets implements Disposable, AssetErrorListener {
                 // create game resource objects
                 backgroundAsset = new AssetBackground(atlas);
                 platformAsset = new AssetPlatform(atlas);
+                plat1 = new AssetPlat1(atlas);
+                plat2 = new AssetPlat2(atlas);
+                plat3 = new AssetPlat3(atlas);
+                plat4 = new AssetPlat4(atlas);
+                plat5 = new AssetPlat5(atlas);
+                plat6 = new AssetPlat6(atlas);
+                plat7 = new AssetPlat7(atlas);
                 characterAsset = new AssetCharacter(atlas);
         }
 
@@ -82,13 +96,76 @@ public class Assets implements Disposable, AssetErrorListener {
                 }
         }
         
+        
+        
+        public class AssetPlat1{
+    		public final AtlasRegion platform;
+    		
+    		public AssetPlat1(TextureAtlas atlas) {
+    			platform = atlas.findRegion("plat1");
+    		}
+        }
+        
+        public class AssetPlat2{
+    		public final AtlasRegion platform;
+    		
+    		public AssetPlat2(TextureAtlas atlas) {
+    			platform = atlas.findRegion("plat2");
+    		}
+        }
+        
+        public class AssetPlat3{
+    		public final AtlasRegion platform;
+    		
+    		public AssetPlat3(TextureAtlas atlas) {
+    			platform = atlas.findRegion("plat3");
+    		}
+        }
+        
+        public class AssetPlat4{
+    		public final AtlasRegion platform;
+    		
+    		public AssetPlat4(TextureAtlas atlas) {
+    			platform = atlas.findRegion("plat4");
+    		}
+        }
+        
+        public class AssetPlat5{
+    		public final AtlasRegion platform;
+    		
+    		public AssetPlat5(TextureAtlas atlas) {
+    			platform = atlas.findRegion("plat5");
+    		}
+        }
+        
+        public class AssetPlat6{
+    		public final AtlasRegion platform;
+    		
+    		public AssetPlat6(TextureAtlas atlas) {
+    			platform = atlas.findRegion("plat6");
+    		}
+        }
+        
+        public class AssetPlat7{
+    		public final AtlasRegion platform;
+    		
+    		public AssetPlat7(TextureAtlas atlas) {
+    			platform = atlas.findRegion("plat7");
+    		}
+        }
+        
+        
+        
+        
         public class AssetPlatform{
         		public final AtlasRegion platform;
         		
         		public AssetPlatform(TextureAtlas atlas) {
-        			platform = atlas.findRegion("platform");
+        			platform = atlas.findRegion("plat1");
         		}
         }
+        
+    
         
         public class AssetCharacter{
         		public final AtlasRegion character;
