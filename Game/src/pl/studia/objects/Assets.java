@@ -207,6 +207,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public class AssetCharacter{
         		public final AtlasRegion character;
         		public final Animation animWalk;
+        		public final Animation animJump;
         		
         		public AssetCharacter(TextureAtlas atlas) {
         			character = atlas.findRegion("static");
@@ -214,9 +215,13 @@ public class Assets implements Disposable, AssetErrorListener {
         			Array<AtlasRegion> regions = null;
         			AtlasRegion region = null;
 
-        			// Animation: Bunny Normal
+        			// Animation: Walk
         			regions = atlas.findRegions("walk");
-        			animWalk = new Animation(0.4f, regions, Animation.LOOP);
+        			animWalk = new Animation(0.2f, regions, Animation.LOOP_PINGPONG);
+        			
+        			// Animation: Jump
+        			regions = atlas.findRegions("jump");
+        			animJump = new Animation(0.2f, regions);
         			
         			
         		}

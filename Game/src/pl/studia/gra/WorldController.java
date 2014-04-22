@@ -93,6 +93,12 @@ public class WorldController extends InputAdapter{
 			cameraHelper.evokeShakeCam(10);
 			Gdx.app.debug(TAG, "Shake enabled");
 		}
+		else if(keycode==Keys.RIGHT && level.character.animation!=null){
+			level.character.setAnimation(null);
+		}
+		else if(keycode==Keys.LEFT && level.character.animation!=null){
+			level.character.setAnimation(null);
+		}
 		return false;
 	}
 	
@@ -141,15 +147,28 @@ public class WorldController extends InputAdapter{
 		cameraHelper.setPosition(x,y);
 	}
 	
+	@Override
+	public boolean keyDown(int keycode){
+		
+		if (keycode == Keys.RIGHT && level.character.animation!=level.character.animJump) {
+			level.character.setAnimation(level.character.animWalk);
+		}
+		if (keycode == Keys.LEFT && level.character.animation!=level.character.animJump) {
+			level.character.setAnimation(level.character.animWalk);
+		}
+		return false;
+	}
+
 	//test method ONLY
 	private void handleInput(float deltaTime){
-	    
+	
 		// Selected Sprite Controls - TEMPORARY
 		if (Gdx.input.isKeyPressed(Keys.LEFT)){
 			level.character.velocity.x = -level.character.terminalVelocity.x;
 	    }
-	    if (Gdx.input.isKeyPressed(Keys.RIGHT))
+	    if (Gdx.input.isKeyPressed(Keys.RIGHT)){
 	    	level.character.velocity.x = level.character.terminalVelocity.x;
+	    }
 	    if(Gdx.input.isKeyPressed(Keys.SPACE))
 	    	level.character.setJumping(true);
 //	    if (Gdx.input.isKeyPressed(Keys.UP))

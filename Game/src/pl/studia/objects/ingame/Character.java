@@ -11,15 +11,16 @@ import pl.studia.util.Constants;
 public class Character extends GameObject{
 	
 	private TextureRegion character;
-	private Animation animWalk;
+	public Animation animWalk;
+	public Animation animJump;
 	
 	/*
 	 * Jumping variables
 	 * JUMP_TIME_MAX defines the maximum time in which our character can be in a jump state
 	 * JUMP_TIME_MIN defines the minimum time in which our character can be in a jump state
 	 */
-	public float timeJumping;
-	public float timeLeft;
+
+
 	private final float JUMP_TIME_MAX = 0.5f;
 	private final float JUMP_TIME_MIN = 0.1f;
 	
@@ -35,6 +36,14 @@ public class Character extends GameObject{
 	public enum JUMP_STATE {
 		GROUNDED, FALLING, JUMP_RISING, JUMP_FALLING
 	}
+	public enum VIEW_DIRECTION {
+		LEFT, RIGHT
+	}
+	public VIEW_DIRECTION viewDirection;
+	public float timeJumping;
+	public float timeLeft;
+	
+	
 	
 	public Character () {
 		init();
@@ -45,7 +54,9 @@ public class Character extends GameObject{
 		
 		character = Assets.instance.characterAsset.character; //Initializing the character from the assets
 		animWalk = Assets.instance.characterAsset.animWalk;
-		setAnimation(animWalk);
+		animJump = Assets.instance.characterAsset.animJump;
+		
+		
 		
 		timeLeft=Constants.LEVEL_TIME;
 		origin.set(dimension.x / 2, dimension.y / 2); //set the origin in the middle of the object
@@ -79,13 +90,18 @@ public class Character extends GameObject{
 		 */
 		jumpState = JUMP_STATE.FALLING;
 		timeJumping = 0;
+		// View direction
+				viewDirection = VIEW_DIRECTION.RIGHT;
 	};
 	
 	@Override
 	public void render(SpriteBatch batch) {
 		TextureRegion reg = null;
-		reg = animation.getKeyFrame(stateTime, true);
-		batch.draw(reg.getTexture(), position.x, position.y, dimension.x, dimension.y, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(), reg.getRegionHeight(), false, false);
+		if(animation!=null)
+			reg = animation.getKeyFrame(stateTime, false);
+		else
+			reg=character;
+		batch.draw(reg.getTexture(), position.x, position.y, dimension.x, dimension.y, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(), reg.getRegionHeight(), viewDirection == VIEW_DIRECTION.LEFT, false);
 	}
 	
 	@Override
@@ -95,6 +111,10 @@ public class Character extends GameObject{
 		if (timeLeft < 0) {
 			timeLeft=0;
 		}
+		if (velocity.x != 0) {
+			viewDirection = velocity.x < 0 ? VIEW_DIRECTION.LEFT : VIEW_DIRECTION.RIGHT;
+			
+		}
 	}
 	
 	/*
@@ -103,16 +123,18 @@ public class Character extends GameObject{
 	@Override
 	public void updateMotionY (float deltaTime){
 		//Check what the current jumpState is
+		if(animation==animJump&&animation.isAnimationFinished(stateTime))
+			setAnimation(null);
 		switch (jumpState) {
 		case GROUNDED:
-			jumpState = JUMP_STATE.FALLING;
-			if (velocity.x != 0) {
-				//setAnimation(animWalk);
-			}
 			
+			jumpState = JUMP_STATE.FALLING;
+
 			break;
 		case JUMP_RISING:
 			timeJumping += deltaTime;
+			
+			
 			if(timeJumping <= JUMP_TIME_MAX){
 				velocity.y = terminalVelocity.y;
 			}
@@ -123,6 +145,7 @@ public class Character extends GameObject{
 			timeJumping += deltaTime;
 			if(timeJumping > 0 && timeJumping <= JUMP_TIME_MIN){
 				velocity.y = terminalVelocity.y;
+				
 			}
 		}
 		//Call the the "upper" updateMotionY method only when our character is NOT grounded
@@ -142,6 +165,7 @@ public class Character extends GameObject{
 		switch (jumpState){
 		case GROUNDED:
 			if(keyPressed){
+				setAnimation(animJump);
 				timeJumping = 0;
 				jumpState = JUMP_STATE.JUMP_RISING;
 			}
@@ -152,6 +176,7 @@ public class Character extends GameObject{
 			}
 			break;
 		case FALLING:
+			
 		case JUMP_FALLING:
 			break;
 		}
