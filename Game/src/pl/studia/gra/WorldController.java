@@ -187,7 +187,7 @@ public class WorldController extends InputAdapter{
 		 * Because our first rectangle will always be our character we can just set it now
 		 * To define a rectangle we need the its bottom left corner position and its width and height
 		 */
-		r1.set(level.character.position.x+0.2f, level.character.position.y, level.character.bounds.width-0.4f, level.character.bounds.height);
+		r1.set(level.character.position.x, level.character.position.y, level.character.bounds.width, level.character.bounds.height);
 	
 		/*
 		 * In here we will loop through all of our objects, setting the r2

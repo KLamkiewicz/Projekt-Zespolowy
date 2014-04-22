@@ -68,8 +68,8 @@ public class CameraHelper {
 	public void shakeCam(float deltaTime){
 		if (currentShakeTime <= shakeTime && hasCharacter()) {
 
-			shakeX = MathUtils.random(character.position.x-0.1f,character.position.x+0.1f);
-			shakeY = MathUtils.random(character.position.y-0.1f,character.position.y+ 0.1f);
+			shakeX = MathUtils.random(character.position.x+3.5f-0.1f,character.position.x+3.5f+0.1f);
+			shakeY = MathUtils.random(character.position.y+2.8f-0.1f,character.position.y+2.8f+ 0.1f);
 		
 		/*	if(this.position.x<shakeX)
 				this.position.x += 0.05;
@@ -110,8 +110,8 @@ public class CameraHelper {
 			camera.position.y = this.position.y;
 			camera.update();
 		} else {
-			camera.position.x = character.position.x;
-			camera.position.y = character.position.y;
+			camera.position.x = character.position.x+3.5f;
+			camera.position.y = character.position.y+2.8f;
 
 			if (currentShakeTime <= shakeTime) {
 				camera.position.x = this.position.x;

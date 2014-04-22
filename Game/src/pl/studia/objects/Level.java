@@ -3,6 +3,7 @@ package pl.studia.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.studia.objects.ingame.GroundBoundary;
 import pl.studia.objects.ingame.Platform;
 import pl.studia.objects.ingame.Character;
 
@@ -33,6 +34,7 @@ public class Level {
 		PLATFORM_TYPE4(155, 80, 255),
 		PLATFORM_TYPE5(155, 40, 255),
 		PLATFORM_TYPE6(155, 0, 255),
+		GROUND_BOUNDARY(0, 255, 0),
 		SPAWN(255, 255, 255); //white spawn point
 		
 		private int color;
@@ -91,7 +93,7 @@ public class Level {
 					obj.platform = Assets.instance.platformAsset.platform;
 					offsetHeight = -2.5f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
-					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y-0.2f);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
 					platforms.add((Platform)obj);
 				
 					//platforms.add((Plat5)obj);
@@ -108,7 +110,7 @@ public class Level {
 					offsetHeight = -2.5f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					obj.dimension.set(5f, 1f);
-					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y-0.2f);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
 					platforms.add((Platform)obj);
 				}
 				
@@ -117,9 +119,18 @@ public class Level {
 					obj.platform = Assets.instance.plat2.platform;
 					offsetHeight = -2.5f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
-					obj.dimension.set(2f, 1.8f);
-					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y-0.2f);
+					obj.dimension.set(2f, 1f);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
 					platforms.add((Platform)obj);
+				}
+				
+				else if (BLOCK_TYPE.GROUND_BOUNDARY.sameColor(currentPixel)) {
+					obj = new GroundBoundary();
+					offsetHeight = -2.5f;
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					obj.dimension.set(1f, 1f);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
+					platforms.add(obj);
 				}
 				
 			}

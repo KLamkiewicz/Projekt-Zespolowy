@@ -108,7 +108,7 @@ public class WorldRenderer implements Disposable{
 			}*/
 			batch.draw(Assets.instance.timeAsset.time, 50,900, 74/2f, 60, 74, 120, 1, 1, 0);
 			batch.setColor(1, 1, 1, 1);
-			Assets.instance.fonts.defaultBig.draw(batch, "" + (int)timeLeft,  150,980);
+			Assets.instance.fonts.defaultNormal.draw(batch, "" + (int)timeLeft,  150,980);
 		}
 	
 	
