@@ -2,12 +2,9 @@ package pl.studia.gra;
 
 import pl.studia.objects.Assets;
 import pl.studia.objects.Background;
-import pl.studia.objects.ingame.Platform;
 import pl.studia.util.Constants;
 import pl.studia.util.ResolutionManager;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -44,7 +41,7 @@ public class WorldRenderer implements Disposable{
 		batch = new SpriteBatch();
 		
 		//texture = new Texture(Gdx.files.internal("data/kk.jpg"));
-		texture2 = new Texture(Gdx.files.internal("data/libgdx.png"));
+		texture2 = new Texture(Gdx.files.internal("data/klepsydraUI.png"));
 		// Enabling Filtering for Scaling up and down, we can apply different filters
 		//texture.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
 		texture2.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -95,9 +92,25 @@ public class WorldRenderer implements Disposable{
 	private void renderGui (SpriteBatch batch) {
 		batch.setProjectionMatrix(cameraGUI.combined);
 		batch.begin();
-		sprite2.draw(batch);
+		//sprite2.draw(batch);
+		renderGuiTime(batch); 
 		batch.end();
 	}
+	
+	
+	private void renderGuiTime (SpriteBatch batch) {
+		float timeLeft = worldController.level.character.timeLeft;
+		
+		/*	if (timeLeft < 4) {
+				if (((int)(timeLeft * 5) % 2) != 0) {
+					batch.setColor(1, 1, 1, 0.5f);
+				}
+			}*/
+			batch.draw(Assets.instance.timeAsset.time, 50,900, 74/2f, 60, 74, 120, 1, 1, 0);
+			batch.setColor(1, 1, 1, 1);
+			Assets.instance.fonts.defaultBig.draw(batch, "" + (int)timeLeft,  150,980);
+		}
+	
 	
 	public void resize(int width, int height) {
 
@@ -113,7 +126,7 @@ public class WorldRenderer implements Disposable{
 		// Reposition of the GUI element - change only first two parameters
 		float x = ResolutionManager.calculateX(ResolutionManager.HorizontalAlignment.LEFT, 0, sprite2.getHeight(), cameraGUI.viewportWidth);
 		float y = ResolutionManager.calculateY(ResolutionManager.VerticalAlignment.TOP, 0, sprite2.getHeight(), cameraGUI.viewportHeight);
-	    sprite2.setPosition(x,y);
+	    sprite2.setPosition(x+50,y-50);
 		
 	}
 	

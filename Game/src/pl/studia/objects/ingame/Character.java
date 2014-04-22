@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import pl.studia.objects.Assets;
 import pl.studia.objects.GameObject;
+import pl.studia.util.Constants;
 
 public class Character extends GameObject{
 	
@@ -16,6 +17,7 @@ public class Character extends GameObject{
 	 * JUMP_TIME_MIN defines the minimum time in which our character can be in a jump state
 	 */
 	public float timeJumping;
+	public float timeLeft;
 	private final float JUMP_TIME_MAX = 0.5f;
 	private final float JUMP_TIME_MIN = 0.1f;
 	
@@ -39,6 +41,7 @@ public class Character extends GameObject{
 	public void init () {
 		character = Assets.instance.characterAsset.character; //Initializing the character from the assets
 		dimension.set(1, 1);
+		timeLeft=Constants.LEVEL_TIME;
 		origin.set(dimension.x / 2, dimension.y / 2); //set the origin in the middle of the object
 		/*
 		 * Setting the boundaries of the character (character is a rectangle)
@@ -82,6 +85,10 @@ public class Character extends GameObject{
 	@Override
 	public void update (float deltaTime) {
 		super.update(deltaTime);
+		timeLeft -= deltaTime;
+		if (timeLeft < 0) {
+			timeLeft=0;
+		}
 	}
 	
 	/*

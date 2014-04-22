@@ -16,9 +16,20 @@ public class Constants {
 	public static final int VIEWPORT_GUI_HEIGHT = 1040;
 	public static final int VIEWPORT_GUI_WIDTH = 650;
 	
+	// UI Width
+	public static final float VIEWPORT_UI_WIDTH = 1920.0f;
+
+	// UI Height
+	public static final float VIEWPORT_UI_HEIGHT = 1200.0f;
 	
 	public static final String TEXTURE_ATLAS_OBJECTS = "images/game.pack";
+	public static final String TEXTURE_ATLAS_UI = "images/game-ui.pack";
 	public static final String LEVEL_01 = "levels/level_01.png";
 	
+	// Location of description file for skins
+	public static final String SKIN_GAME_UI = "images/game-ui.json";
+	
+	//Game Time
+	public static final int LEVEL_TIME = 120;
 	
 }

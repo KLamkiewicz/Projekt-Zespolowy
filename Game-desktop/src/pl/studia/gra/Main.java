@@ -25,9 +25,10 @@ public class Main {
 			Settings settings = new Settings();
 			settings.maxWidth = 4096;
 			settings.maxHeight = 4096;
-			settings.debug = drawDebugOutline;
+			settings.debug = false;
 			TexturePacker2.process(settings, "assets-raw/images",
 					"../Game-android/assets/images", "game.pack");
+			TexturePacker2.process(settings, "assets-raw/images-ui", "../Game-android/assets/images", "game-ui.pack");
 			System.out.println(settings.debug);
 		}
 		
@@ -35,7 +36,7 @@ public class Main {
 		
 		cfg.title = "Game";
 		cfg.useGL20 = true;
-		cfg.fullscreen = false;
+		cfg.fullscreen = true;
 		cfg.width = screenDimension.width;
 		cfg.height= screenDimension.height;
 	

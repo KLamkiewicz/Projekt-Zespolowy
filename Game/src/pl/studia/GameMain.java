@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Interpolation;
 import pl.studia.objects.Assets;
 import pl.studia.screens.DirectedGame;
 import pl.studia.screens.GameScreen;
+import pl.studia.screens.MenuScreen;
 import pl.studia.screens.transitions.ScreenTransition;
 import pl.studia.screens.transitions.ScreenTransitionSlice;
 
@@ -30,7 +31,7 @@ public class GameMain extends DirectedGame {
 
 		// Start game at menu screen
 		ScreenTransition transition = ScreenTransitionSlice.init(2, ScreenTransitionSlice.UP_DOWN, 10, Interpolation.pow5Out);
-		setScreen(new GameScreen(this), transition);
+		setScreen(new MenuScreen(this), transition);
 	}
 	
 	
