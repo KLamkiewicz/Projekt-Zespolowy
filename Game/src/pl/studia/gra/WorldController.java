@@ -165,9 +165,13 @@ public class WorldController extends InputAdapter{
 		// Selected Sprite Controls - TEMPORARY
 		if (Gdx.input.isKeyPressed(Keys.LEFT)){
 			level.character.velocity.x = -level.character.terminalVelocity.x;
+			if(level.character.animation==null)
+				level.character.setAnimation(level.character.animWalk);
 	    }
 	    if (Gdx.input.isKeyPressed(Keys.RIGHT)){
 	    	level.character.velocity.x = level.character.terminalVelocity.x;
+	    	if(level.character.animation==null)
+	    		level.character.setAnimation(level.character.animWalk);
 	    }
 	    if(Gdx.input.isKeyPressed(Keys.SPACE))
 	    	level.character.setJumping(true);
