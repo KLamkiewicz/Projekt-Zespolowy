@@ -1,5 +1,6 @@
 package pl.studia.objects;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -16,6 +17,8 @@ public abstract class GameObject {
 	public Vector2 acceleration;		//Object acceleration
 	public Rectangle bounds;			//Object area used to determine collision
 	public TextureRegion platform;
+	public Animation animation;
+	public float stateTime;
 	
 
 	public GameObject(){
@@ -30,6 +33,7 @@ public abstract class GameObject {
 	}
 	
 	public void update (float deltaTime) {
+		stateTime += deltaTime;
 		updateMotionX(deltaTime);
 		updateMotionY(deltaTime);
 		// Move the object to the new position after all the "physics" are applied to its motion
@@ -74,6 +78,13 @@ public abstract class GameObject {
 		velocity.y += acceleration.y * deltaTime;
 		// Velocity is clamped - preventing it from exceeding both positive and negative speed
 		velocity.y = MathUtils.clamp(velocity.y, -terminalVelocity.y, terminalVelocity.y);
+	}
+	
+	
+	
+	public void setAnimation (Animation animation) {
+		this.animation = animation;
+		stateTime = 0;
 	}
 	
 }

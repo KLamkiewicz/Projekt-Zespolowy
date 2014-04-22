@@ -1,5 +1,6 @@
 package pl.studia.objects.ingame;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -10,6 +11,7 @@ import pl.studia.util.Constants;
 public class Character extends GameObject{
 	
 	private TextureRegion character;
+	private Animation animWalk;
 	
 	/*
 	 * Jumping variables
@@ -39,8 +41,12 @@ public class Character extends GameObject{
 	}
 	
 	public void init () {
-		character = Assets.instance.characterAsset.character; //Initializing the character from the assets
 		dimension.set(1, 1);
+		
+		character = Assets.instance.characterAsset.character; //Initializing the character from the assets
+		animWalk = Assets.instance.characterAsset.animWalk;
+		setAnimation(animWalk);
+		
 		timeLeft=Constants.LEVEL_TIME;
 		origin.set(dimension.x / 2, dimension.y / 2); //set the origin in the middle of the object
 		/*
@@ -77,9 +83,9 @@ public class Character extends GameObject{
 	
 	@Override
 	public void render(SpriteBatch batch) {
-		TextureRegion region = null;
-		region = character;
-		batch.draw(region.getTexture(), position.x, position.y, dimension.x, dimension.y, region.getRegionX(), region.getRegionY(), region.getRegionWidth(), region.getRegionHeight(), false, false);
+		TextureRegion reg = null;
+		reg = animation.getKeyFrame(stateTime, true);
+		batch.draw(reg.getTexture(), position.x, position.y, dimension.x, dimension.y, reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(), reg.getRegionHeight(), false, false);
 	}
 	
 	@Override
@@ -100,6 +106,10 @@ public class Character extends GameObject{
 		switch (jumpState) {
 		case GROUNDED:
 			jumpState = JUMP_STATE.FALLING;
+			if (velocity.x != 0) {
+				//setAnimation(animWalk);
+			}
+			
 			break;
 		case JUMP_RISING:
 			timeJumping += deltaTime;

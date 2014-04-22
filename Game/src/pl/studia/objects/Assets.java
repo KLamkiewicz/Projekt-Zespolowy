@@ -11,9 +11,11 @@ import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 
@@ -204,9 +206,19 @@ public class Assets implements Disposable, AssetErrorListener {
         
         public class AssetCharacter{
         		public final AtlasRegion character;
+        		public final Animation animWalk;
         		
         		public AssetCharacter(TextureAtlas atlas) {
-        			character = atlas.findRegion("morda");
+        			character = atlas.findRegion("static");
+        			
+        			Array<AtlasRegion> regions = null;
+        			AtlasRegion region = null;
+
+        			// Animation: Bunny Normal
+        			regions = atlas.findRegions("walk");
+        			animWalk = new Animation(0.4f, regions, Animation.LOOP);
+        			
+        			
         		}
         }
         
