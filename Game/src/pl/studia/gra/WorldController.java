@@ -30,6 +30,7 @@ public class WorldController extends InputAdapter{
 	public int 					selectedSprite;
 	public Texture 				texture;
 	public Level				level;
+	public int score;
 	
 	
 	public WorldController(DirectedGame game){
@@ -206,6 +207,18 @@ public class WorldController extends InputAdapter{
 	 * Our method which will check whether there is an overlap or not
 	 */
 	public void checkForCollision(){
+		
+		
+		for (GoldCoin goldcoin : level.goldCoins) {
+			if (goldcoin.collected) continue;
+			r2.set(goldcoin.position.x, goldcoin.position.y, goldcoin.bounds.width, goldcoin.bounds.height);
+			if (!r1.overlaps(r2)) continue;
+				onCollisionCharacterWithGoldCoin(goldcoin);
+			break;
+		}
+		
+		
+		
 		/*
 		 * Because our first rectangle will always be our character we can just set it now
 		 * To define a rectangle we need the its bottom left corner position and its width and height
@@ -284,6 +297,12 @@ public class WorldController extends InputAdapter{
 			character.jumpState = JUMP_STATE.JUMP_FALLING;
 			break;
 		}
+	}
+	
+	private void onCollisionCharacterWithGoldCoin (GoldCoin goldcoin) {
+		goldcoin.collected = true;
+		score += goldcoin.getScore();
+		Gdx.app.log(TAG, "Gold coin collected");
 	}
 	
 

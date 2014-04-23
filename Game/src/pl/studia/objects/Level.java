@@ -3,6 +3,7 @@ package pl.studia.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.studia.objects.ingame.GoldCoin;
 import pl.studia.objects.ingame.GroundBoundary;
 import pl.studia.objects.ingame.Platform;
 import pl.studia.objects.ingame.Character;
@@ -15,6 +16,7 @@ public class Level {
 	public static final String TAG = Level.class.getName();
 	// Game objects
 	public List<GameObject> platforms;
+	public List<GoldCoin> goldCoins;
 	public Character character;
 	
 	/*
@@ -35,6 +37,7 @@ public class Level {
 		PLATFORM_TYPE5(155, 40, 255),
 		PLATFORM_TYPE6(155, 0, 255),
 		GROUND_BOUNDARY(0, 255, 0),
+		GOLD_COIN(255,242,0),
 		SPAWN(255, 255, 255); //white spawn point
 		
 		private int color;
@@ -66,6 +69,7 @@ public class Level {
 		//p = new Plat1();
 		platforms = new ArrayList<GameObject>();
 		character = null;
+		goldCoins = new ArrayList<GoldCoin>();
 		//Load the level image
 		Pixmap pixmap = new Pixmap(Gdx.files.internal(filename));
 		//int lastPixel = -1;
@@ -133,6 +137,14 @@ public class Level {
 					platforms.add(obj);
 				}
 				
+				else if (BLOCK_TYPE.GOLD_COIN.sameColor(currentPixel)) {
+					obj = new GoldCoin();
+					offsetHeight = -0.5f;
+					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
+					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
+					goldCoins.add((GoldCoin) obj);
+				}
+				
 			}
 		}
 		//Free memory
@@ -145,13 +157,20 @@ public class Level {
 		for(GameObject p : platforms){
 			p.render(batch);
 		}
+		for(GoldCoin g : goldCoins){
+			g.render(batch);
+		}
 		character.render(batch);
+		
 	}
 	
 	public void update(float deltaTime){
 		character.update(deltaTime);
 		for(GameObject platform : platforms){
 			platform.update(deltaTime);
+		}
+		for(GoldCoin g : goldCoins){
+			g.update(deltaTime);
 		}
 	}
 	

@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class GameObject {
 	public Vector2 position;
 	public Vector2 dimension;
+	public Vector2 scale;
+	public float rotation;
 	public Vector2 origin;
 	public Vector2 velocity;			//Object current speed
 	public Vector2 terminalVelocity;	//Object maximum speed
@@ -30,6 +32,8 @@ public abstract class GameObject {
 		friction = new Vector2();
 		acceleration = new Vector2();
 		bounds = new Rectangle();
+		scale = new Vector2(1, 1);
+		rotation = 0;
 	}
 	
 	public void update (float deltaTime) {

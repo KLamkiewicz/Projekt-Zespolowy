@@ -38,6 +38,7 @@ public class Assets implements Disposable, AssetErrorListener {
         public AssetPlat7 plat7;
         public AssetTime timeAsset;
         public AssetCharacter characterAsset;
+        public AssetGoldCoin goldCoin;
     	
         
 
@@ -75,6 +76,7 @@ public class Assets implements Disposable, AssetErrorListener {
                 plat6 = new AssetPlat6(atlas);
                 plat7 = new AssetPlat7(atlas);
                 timeAsset = new AssetTime(atlas);
+                goldCoin = new AssetGoldCoin(atlas);
             	fonts = new AssetFonts();
                 characterAsset = new AssetCharacter(atlas);
         }
@@ -202,6 +204,17 @@ public class Assets implements Disposable, AssetErrorListener {
         		}
         }
         
+        
+        public class AssetGoldCoin {
+    		
+    		public final Animation animGoldCoin;
+    		public AssetGoldCoin (TextureAtlas atlas) {
+    			
+    			// Animation: Gold Coin
+    			Array<AtlasRegion> regions = atlas.findRegions("gold");
+    			animGoldCoin = new Animation(0.01f, regions, Animation.LOOP);
+    		}
+    	}
     
         
         public class AssetCharacter{
