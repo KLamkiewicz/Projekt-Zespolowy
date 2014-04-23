@@ -206,10 +206,11 @@ public class Assets implements Disposable, AssetErrorListener {
         
         
         public class AssetGoldCoin {
-    		
+        	public final AtlasRegion goldCoinStatic;
     		public final Animation animGoldCoin;
+    		
     		public AssetGoldCoin (TextureAtlas atlas) {
-    			
+    			goldCoinStatic = atlas.findRegion("Static_gold");
     			// Animation: Gold Coin
     			Array<AtlasRegion> regions = atlas.findRegions("gold");
     			animGoldCoin = new Animation(0.01f, regions, Animation.LOOP);
