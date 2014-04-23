@@ -117,4 +117,10 @@ Jak uruchomic
 
 Eclipse -> Run -> Run configurations -> Arguments -> VM Arguments -> -Xms512M -> Apply
 
-Dociagniecie assetow https://www.dropbox.com/home/PROJEKT%20ZESPOLOWY%20-%20planowanie/assets-raw wrzucic do Game-desktop assets-raw , w przypadku błedów w kompilacji odświeżyć Game-android
+Dociagniecie assetow https://www.dropbox.com/home/PROJEKT%20ZESPOLOWY%20-%20planowanie/Files 
+
+assets-raw(folder) -> Game-desktop
+
+android-assets-images(pliki) -> Game-android -> assets -> images
+
+
