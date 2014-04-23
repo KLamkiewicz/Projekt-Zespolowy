@@ -139,7 +139,7 @@ public class Level {
 				
 				else if (BLOCK_TYPE.GOLD_COIN.sameColor(currentPixel)) {
 					obj = new GoldCoin();
-					offsetHeight = -0.5f;
+					offsetHeight = -2.0f;
 					obj.position.set(pixelX, baseHeight * obj.dimension.y + offsetHeight);
 					obj.bounds.set(0, 0, obj.dimension.x, obj.dimension.y);
 					goldCoins.add((GoldCoin) obj);

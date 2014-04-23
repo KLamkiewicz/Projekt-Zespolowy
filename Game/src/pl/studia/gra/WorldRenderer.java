@@ -94,6 +94,7 @@ public class WorldRenderer implements Disposable{
 		batch.begin();
 		//sprite2.draw(batch);
 		renderGuiTime(batch); 
+		renderGuiScore(batch);
 		batch.end();
 	}
 	
@@ -110,6 +111,14 @@ public class WorldRenderer implements Disposable{
 			batch.setColor(1, 1, 1, 1);
 			Assets.instance.fonts.defaultNormal.draw(batch, "" + (int)timeLeft,  150,980);
 		}
+	
+	private void renderGuiScore(SpriteBatch batch){
+		float x;
+		float y;
+		x= ResolutionManager.calculateX(ResolutionManager.HorizontalAlignment.RIGHT, 0, 200, cameraGUI.viewportWidth);
+		y = ResolutionManager.calculateY(ResolutionManager.VerticalAlignment.TOP, 0, 50, cameraGUI.viewportHeight);
+		Assets.instance.fonts.defaultNormal.draw(batch, "" + (int)worldController.score, x  , y );
+	}
 	
 	
 	public void resize(int width, int height) {

@@ -17,7 +17,7 @@ public class GoldCoin extends GameObject{
 	}
 
 	private void init () {
-		dimension.set(0.75f, 0.75f);
+		dimension.set(1f, 1f);
 
 		setAnimation(Assets.instance.goldCoin.animGoldCoin);
 		stateTime = MathUtils.random(0.0f, 1.0f);
