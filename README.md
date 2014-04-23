@@ -94,6 +94,8 @@ Eclipse -> Run -> Run configurations -> Arguments -> VM Arguments -> -Xms512M ->
 Dociagniecie assetow https://www.dropbox.com/home/PROJEKT%20ZESPOLOWY%20-%20planowanie/Files 
 
 assets-raw(folder) -> Game-desktop
+
 android-assets-sound(folder) Game-android -> assets
+
 android-assets-images(pliki) -> Game-android -> assets -> images
 
