@@ -13,6 +13,7 @@ import pl.studia.objects.ingame.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -32,11 +33,14 @@ public class WorldController extends InputAdapter{
 	public int 					selectedSprite;
 	public Texture 				texture;
 	public Level				level;
+	public Music				music;
 	//public int score;
 	
 	
 	public WorldController(DirectedGame game){
 		this.game=game;
+		music = Gdx.audio.newMusic(Gdx.files.internal("sound/game.mp3"));
+		music.setLooping(true);
 		init();
 	}
 	
@@ -51,6 +55,8 @@ public class WorldController extends InputAdapter{
 		initLevel();
 		//cameraHelper.setCharacter(testSprites[0]);
 		cameraHelper.setCharacter(level.character);
+		if(!music.isPlaying())
+			music.play();
 	}
 	
 	private void initLevel() {
