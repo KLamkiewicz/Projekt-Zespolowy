@@ -29,7 +29,9 @@ public class GoldCoin extends GameObject{
 	}
 
 	public void render (SpriteBatch batch) {
-		if (collected) return;
+		if (collected) {
+			return;
+		}
 
 		TextureRegion reg = null;
 

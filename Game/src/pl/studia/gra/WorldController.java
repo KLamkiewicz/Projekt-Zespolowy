@@ -19,6 +19,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 
 public class WorldController extends InputAdapter{
@@ -30,7 +32,7 @@ public class WorldController extends InputAdapter{
 	public int 					selectedSprite;
 	public Texture 				texture;
 	public Level				level;
-	public int score;
+	//public int score;
 	
 	
 	public WorldController(DirectedGame game){
@@ -66,7 +68,7 @@ public class WorldController extends InputAdapter{
 		level.update(deltaTime);
 		checkForCollision();
 		cameraHelper.shakeCam(deltaTime);
-		
+		gameResult();
 	}
 	
 	@Override
@@ -301,9 +303,22 @@ public class WorldController extends InputAdapter{
 	
 	private void onCollisionCharacterWithGoldCoin (GoldCoin goldcoin) {
 		goldcoin.collected = true;
-		score += goldcoin.getScore();
+		//score += goldcoin.getScore();
+		level.character.score += goldcoin.getScore();
 		Gdx.app.log(TAG, "Gold coin collected");
 	}
 	
+	private void gameResult(){
+		if(level.character.timeLeft<=0){
+			float delay = 0.05f; // seconds
+
+			Timer.schedule(new Task(){
+			    @Override
+			    public void run() {
+			        init();
+			    }
+			}, delay);
+		}
+	}
 
 }

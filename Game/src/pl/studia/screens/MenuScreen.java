@@ -6,6 +6,7 @@ import pl.studia.util.Constants;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -31,6 +32,7 @@ public class MenuScreen extends AbstractGameScreen{
 	// menu
 	private Image imgBackground;
 	private Button btnMenuPlay;
+	private Music music;
 	
 	// debug
 		private final float DEBUG_REBUILD_INTERVAL = 5.0f;
@@ -39,6 +41,9 @@ public class MenuScreen extends AbstractGameScreen{
 	
 	public MenuScreen (DirectedGame game) {
 		super(game);
+		music = Gdx.audio.newMusic(Gdx.files.internal("sound/menu.mp3"));
+		music.setLooping(true);
+		music.play();
 	}
 	
 	@Override
@@ -129,6 +134,7 @@ public class MenuScreen extends AbstractGameScreen{
 	private void onPlayClicked () {
 		ScreenTransition transition = ScreenTransitionSlice.init(2, ScreenTransitionSlice.UP_DOWN, 10, Interpolation.pow5Out);
 		game.setScreen(new GameScreen(game), transition);
+		music.dispose();
 	}
 
 	

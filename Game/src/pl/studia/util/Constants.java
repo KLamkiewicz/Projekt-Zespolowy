@@ -30,6 +30,6 @@ public class Constants {
 	public static final String SKIN_GAME_UI = "images/game-ui.json";
 	
 	//Game Time
-	public static final int LEVEL_TIME = 120;
+	public static final int LEVEL_TIME = 50;
 	
 }

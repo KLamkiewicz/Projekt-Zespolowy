@@ -117,7 +117,7 @@ public class WorldRenderer implements Disposable{
 		float y;
 		x= ResolutionManager.calculateX(ResolutionManager.HorizontalAlignment.RIGHT, 0, 200, cameraGUI.viewportWidth);
 		y = ResolutionManager.calculateY(ResolutionManager.VerticalAlignment.TOP, 0, 50, cameraGUI.viewportHeight);
-		Assets.instance.fonts.defaultNormal.draw(batch, "" + (int)worldController.score, x  , y );
+		Assets.instance.fonts.defaultNormal.draw(batch, "" + (int)worldController.level.character.score, x  , y );
 		batch.draw(Assets.instance.goldCoin.goldCoinStatic, x -70, y -60);
 	}
 	
