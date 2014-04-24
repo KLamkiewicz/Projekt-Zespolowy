@@ -33,13 +33,16 @@ public class WorldController extends InputAdapter{
 	public int 					selectedSprite;
 	public Texture 				texture;
 	public Level				level;
-	public Music				music;
+	public Music				music, collectedSound, jumpSound, hitSound;
 	//public int score;
 	
 	
 	public WorldController(DirectedGame game){
 		this.game=game;
 		music = Gdx.audio.newMusic(Gdx.files.internal("sound/game.mp3"));
+		collectedSound = Gdx.audio.newMusic(Gdx.files.internal("sound/coinSound.wav"));
+		hitSound = Gdx.audio.newMusic(Gdx.files.internal("sound/hitSound.wav"));
+		jumpSound = Gdx.audio.newMusic(Gdx.files.internal("sound/hitSound.wav"));
 		music.setLooping(true);
 		init();
 	}
@@ -182,8 +185,9 @@ public class WorldController extends InputAdapter{
 	    	if(level.character.animation==null)
 	    		level.character.setAnimation(level.character.animWalk);
 	    }
-	    if(Gdx.input.isKeyPressed(Keys.SPACE))
+	    if(Gdx.input.isKeyPressed(Keys.SPACE)){
 	    	level.character.setJumping(true);
+	    }
 //	    if (Gdx.input.isKeyPressed(Keys.UP))
 //	    	moveSelectedSprite(0f, 0.2f);
 //	    if (Gdx.input.isKeyPressed(Keys.DOWN))
@@ -301,6 +305,7 @@ public class WorldController extends InputAdapter{
 			break;
 		case JUMP_RISING:
 			character.position.y = platform.position.y + character.bounds.height;
+			hitSound.play();
 			//This removes the ping-pong effect
 			character.jumpState = JUMP_STATE.JUMP_FALLING;
 			break;
@@ -311,6 +316,8 @@ public class WorldController extends InputAdapter{
 		goldcoin.collected = true;
 		//score += goldcoin.getScore();
 		level.character.score += goldcoin.getScore();
+		collectedSound.play();
+		
 		Gdx.app.log(TAG, "Gold coin collected");
 	}
 	
