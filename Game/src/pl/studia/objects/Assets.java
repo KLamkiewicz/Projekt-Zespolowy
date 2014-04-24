@@ -121,9 +121,13 @@ public class Assets implements Disposable, AssetErrorListener {
                 public AssetBackground(TextureAtlas atlas) {
                 	backgrounds = new ArrayList<AtlasRegion>();
                 	backgrounds.add(atlas.findRegion("background1"));
+                	backgrounds.add(atlas.findRegion("background1top")); 
                 	backgrounds.add(atlas.findRegion("background2"));
+                	backgrounds.add(atlas.findRegion("background2top"));
                 	backgrounds.add(atlas.findRegion("background3"));
+                	backgrounds.add(atlas.findRegion("background3top"));
                 	backgrounds.add(atlas.findRegion("background4"));
+                	backgrounds.add(atlas.findRegion("background4top"));
                 	
                 	//background = atlas.findRegion("background3");
                 }

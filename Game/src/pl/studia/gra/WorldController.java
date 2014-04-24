@@ -40,7 +40,7 @@ public class WorldController extends InputAdapter{
 	public WorldController(DirectedGame game){
 		this.game=game;
 		music = Gdx.audio.newMusic(Gdx.files.internal("sound/game.mp3"));
-		collectedSound = Gdx.audio.newMusic(Gdx.files.internal("sound/coinSound.wav"));
+		collectedSound = Gdx.audio.newMusic(Gdx.files.internal("sound/coinSound.mp3"));
 		hitSound = Gdx.audio.newMusic(Gdx.files.internal("sound/hitSound.wav"));
 		jumpSound = Gdx.audio.newMusic(Gdx.files.internal("sound/hitSound.wav"));
 		music.setLooping(true);

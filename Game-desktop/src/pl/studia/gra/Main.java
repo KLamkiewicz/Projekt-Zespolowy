@@ -23,8 +23,8 @@ public class Main {
 		 */
 		if (rebuildAtlas) {
 			Settings settings = new Settings();
-			settings.maxWidth = 4096;
-			settings.maxHeight = 4096;
+			settings.maxWidth = 8192;
+			settings.maxHeight = 8192;
 			settings.debug = false;
 			TexturePacker2.process(settings, "assets-raw/images",
 					"../Game-android/assets/images", "game.pack");
