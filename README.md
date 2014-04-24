@@ -95,6 +95,7 @@ Dociagniecie assetow https://www.dropbox.com/home/PROJEKT%20ZESPOLOWY%20-%20plan
 
 assets-raw(folder) -> Game-desktop
 
-android-assets-images(pliki) -> Game-android -> assets -> images
+android-assets-sound(folder) Game-android -> assets
 
+android-assets-images(pliki) -> Game-android -> assets -> images
 
